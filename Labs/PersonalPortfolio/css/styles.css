@@ -42,6 +42,18 @@ footer {
 #me, #welcomeText {
     float: left;
 }
+#welcomeText {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.2em;
+    /*margin-bottom: 0px;*/
+}
+#me img {
+    border-radius: 25px;
+    height: 350px;
+    margin-left: 15%;
+    margin-right: 20px;
+    /*background-size: 15%;*/
+}
 #copyright {
     border-bottom-color: black;
 }
@@ -52,7 +64,6 @@ footer {
     height: 13%;
     width: 13%;
 }
-
 /*about.html exclusive styles*/
 table {
     margin: 0px auto;
