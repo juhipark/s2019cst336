@@ -1,0 +1,35 @@
+body {
+    background-color: #74c1c3;
+    background-image: linear-gradient(to bottom right, #9DBCB3, #2FC7DD, #37B8E9);
+}
+header, main, nav, footer {
+    text-align: center;
+}
+footer p{
+    font-size: 12px;
+}
+header {
+    display: block;
+    font-family: 'Major Mono Display', monospace;
+}
+main {
+    font-family: 'Robot', sans-serif;
+}
+nav a {
+    padding: 15px;
+    padding-top: 4px;
+    padding-bottom: 4.5px;
+    font-family: 'Robot', sans-serif;
+    background-color: #F7704A;
+    color: white;
+    transition: transform .8s;
+}
+nav a:hover {
+    color: #77CB6D;
+    transform: scale(1.5);
+}
+
+welcomeImg img{
+    width: 300px;
+    height: 30%;
+}
