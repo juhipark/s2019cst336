@@ -58,7 +58,7 @@ $("document").ready(function(){
             guessCount++;
         } else {
             console.log("Wrong input");
-        
+            alert("Wrong input! Please try again");
         }
         guessField.value = '';
         guessField.focus();
