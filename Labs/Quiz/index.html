@@ -158,7 +158,8 @@
          
          <div id="scoreboard">
             <p id="numQuestions">Correct answers: 0 / 10 </p>
-             <p id="scoreUpdate">Current score is: 0</p>
+            <p id="scoreUpdate">Current score is: 0</p>
+            <p id="congratulatoryMessage"></p>
          </div>
          
          
@@ -247,6 +248,13 @@
                 document.getElementById('numQuestions').innerHTML= "Correct answers: " + score +"/10";
                 score = (score / 10) * 100;
                 document.getElementById('scoreUpdate').innerHTML= "Current score is: " + score +"%";
+                if(score >= 90) {
+                    document.getElementById('congratulatoryMessage').innerHTML= "GREAT! You got MORE than 90%!";
+                    document.getElementById('scoreboard').style.background = "green";
+                }else {
+                    document.getElementById('congratulatoryMessage').innerHTML= "Try again! You got LESS than 90%!";
+                    document.getElementById('scoreboard').style.background = "red";
+                }
             }
             
         </script>
