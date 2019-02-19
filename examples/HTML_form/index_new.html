@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> </title>
+    </head>
+    <body>
+        <form action="confirmation.php" method="post">
+            First Name: <input type="text" name="firstName">
+            Last Name: <input type="text" name="lastName">
+            <!--<input type="submit" value="Go!">-->
+            <button id="goButton" onclick="onGoButtonClick(event)">Go!</button>
+        </form>
+        
+        
+        <script>
+            var buttonElement = document.getElementById("goButton");
+            buttonElement.addEventListener("click", function(e) {
+                 document.getElementById("mainForm").submit();
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Baby Name Guessing Game</title>
+    </head>
+    <body>
+        Baby Name Guessing Game
+        
+        <form id="mutipleNames">
+            <div id="radioChoice">
+                <input type="radio" id="item1" name="nameChoices" value="Alice">
+                <label for="item1">Alice</label> 
+                <input type="radio" id="item2" name="nameChoices" value="John">
+                <label for="item2">John</label>
+                <input type="radio" id="item3" name="nameChoices" value="Juhi">
+                <label for="item3">Juhi</label> 
+                <input type="radio" id="item4" name="nameChoices" value="Iris">
+                <label for="item4">Iris</label>
+                <input type="radio" id="item5" name="nameChoices" value="Amsterdam">
+                <label for="item5">Amsterdam</label>
+
+            </div>
+            
+            <button id="goButton" type="button" onclick="displayData(event)">Submit Data</button>
+        </form>
+        
+        <div id="result">
+                
+        </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        var answer = "Iris";
+        var buttonElement = document.getElementById("nameChoices");
+        
+        function displayData(e){
+        //   var usrGuess = document.getElementById("mutipleNames").submit().value;
+        //   console.log(usrGuess);
+        //   //alert(usrGuess.value);
+        //   if(usrGuess === answer) {
+        //       alert("You guessed right!");
+        //   } else {
+        //       alert("You are wrong!");
+        //   }
+        
+            /* //Right method 1 
+            if(document.getElementById("item4").checked) {
+                alert("You are right!");
+                
+            }else {
+                
+                alert("You are wrong!");
+            }
+            */
+            
+            /* //Right method 2 */
+            var selectedName = document.querySelector('input[name="nameChoices"]:checked').value;
+            if(answer === selectedName){
+                
+                alert("You are RIGHT!");
+                $("#result").html(selectedName + " is correct").css("color", "green");                
+            } else {
+                alert("You are WRONG!");
+                $("#result").html(selectedName + " is wrong").css("color", "red");                
+
+            }
+        
+        
+        }
+     
+        
+    </script>
+    </body>
+</html>

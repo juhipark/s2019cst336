@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Multiplication Quiz </title>
+        
+        <link href="css/styles.css" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Oswald" rel="stylesheet">
+    
+    </head>
+    <body>
+        
+        <div id="heading">
+            <h1>Multiplication Quiz</h1>
+        </div>
+        
+        <div id="content">
+            <p>Select 2~11 range for multiplication (eg. 9x9)</p>
+            <form>
+                <input type="range" name="rangeInput" value ="2" min="2" max="10" onchange="updateTextInput(this.value);">
+                <input type="text" id="textInput" value="2">
+            </form>
+            
+            <p>Click on one of the text labels to answer: </p>
+            
+            <form>
+                <fieldset class="question">
+                    <legend id="question">1 X 1</legend> 
+                    <div class="input-group">
+                        <label for="answer1">1</label><input type="radio" name="group1" id="item1" value="1"/>
+                        <label for="answer2">1</label><input type="radio" name="group1" id="item2" value="1"/>
+                        <label for="answer3">1</label><input type="radio" name="group1" id="item3" value="1"/>
+                        <label for="answer4">1</label><input type="radio" name="group1" id="item4" value="1"/>
+                    </div>
+                    <div id="checker">
+                        <img src="img/green_check.png" width="50px">
+                    </div>
+                </fieldset>
+                
+                 <fieldset class="question">
+                    <legend id="question">1 X 1</legend> 
+                    <div class="input-group">
+                        <label for="answer1">1</label><input type="radio" name="group2" id="item1" value="1"/>
+                        <label for="answer2">1</label><input type="radio" name="group2" id="item2" value="1"/>
+                        <label for="answer3">1</label><input type="radio" name="group2" id="item3" value="1"/>
+                        <label for="answer4">1</label><input type="radio" name="group2" id="item4" value="1"/>
+                    </div>
+                    <div id="checker">
+                        <img src="img/green_check.png" width="50px">
+                    </div>
+                </fieldset>
+                
+                <fieldset class="question">
+                    <legend id="question">1 X 1</legend> 
+                    <div class="input-group">
+                        <label for="answer1">1</label><input type="radio" name="group3" id="item1" value="1"/>
+                        <label for="answer2">1</label><input type="radio" name="group3" id="item2" value="1"/>
+                        <label for="answer3">1</label><input type="radio" name="group3" id="item3" value="1"/>
+                        <label for="answer4">1</label><input type="radio" name="group3" id="item4" value="1"/>
+                    </div>
+                    <div id="checker">
+                        <img src="img/green_check.png" width="50px">
+                    </div>
+                </fieldset>
+                
+                 <fieldset class="question">
+                    <legend id="question">1 X 1</legend> 
+                    <div class="input-group">
+                        <label for="answer1">1</label><input type="radio" name="group4" id="item1" value="1"/>
+                        <label for="answer2">1</label><input type="radio" name="group4" id="item2" value="1"/>
+                        <label for="answer3">1</label><input type="radio" name="group4" id="item3" value="1"/>
+                        <label for="answer4">1</label><input type="radio" name="group4" id="item4" value="1"/>
+                    </div>
+                    <div id="checker">
+                        <img src="img/green_check.png" width="50px">
+                    </div>
+                </fieldset>
+                
+                <fieldset class="question">
+                    <legend id="question">1 X 1</legend> 
+                    <div class="input-group">
+                        <label for="answer1">1</label><input type="radio" name="group5" id="item1" value="1"/>
+                        <label for="answer2">1</label><input type="radio" name="group5" id="item2" value="1"/>
+                        <label for="answer3">1</label><input type="radio" name="group5" id="item3" value="1"/>
+                        <label for="answer4">1</label><input type="radio" name="group5" id="item4" value="1"/>
+                    </div>
+                    <div id="checker">
+                        <img src="img/green_check.png" width="50px">
+                    </div>
+                </fieldset>
+                
+                 <fieldset class="question">
+                    <legend id="question">1 X 1</legend> 
+                    <div class="input-group">
+                        <label for="answer1">1</label><input type="radio" name="group6" id="item1" value="1"/>
+                        <label for="answer2">1</label><input type="radio" name="group6" id="item2" value="1"/>
+                        <label for="answer3">1</label><input type="radio" name="group6" id="item3" value="1"/>
+                        <label for="answer4">1</label><input type="radio" name="group6" id="item4" value="1"/>
+                    </div>
+                    <div id="checker">
+                        <img src="img/green_check.png" width="50px">
+                    </div>
+                </fieldset>
+                
+                <fieldset class="question">
+                    <legend id="question">1 X 1</legend> 
+                    <div class="input-group">
+                        <label for="answer1">1</label><input type="radio" name="group7" id="item1" value="1"/>
+                        <label for="answer2">1</label><input type="radio" name="group7" id="item2" value="1"/>
+                        <label for="answer3">1</label><input type="radio" name="group7" id="item3" value="1"/>
+                        <label for="answer4">1</label><input type="radio" name="group7" id="item4" value="1"/>
+                    </div>
+                    <div id="checker">
+                        <img src="img/green_check.png" width="50px">
+                    </div>
+                </fieldset>
+                
+                 <fieldset class="question">
+                    <legend id="question">1 X 1</legend> 
+                    <div class="input-group">
+                        <label for="answer1">1</label><input type="radio" name="group8" id="item1" value="1"/>
+                        <label for="answer2">1</label><input type="radio" name="group8" id="item2" value="1"/>
+                        <label for="answer3">1</label><input type="radio" name="group8" id="item3" value="1"/>
+                        <label for="answer4">1</label><input type="radio" name="group8" id="item4" value="1"/>
+                    </div>
+                    <div id="checker">
+                        <img src="img/green_check.png" width="50px">
+                    </div>
+                </fieldset>
+                
+                <fieldset class="question">
+                    <legend id="question">1 X 1</legend> 
+                    <div class="input-group">
+                        <label for="answer1">1</label><input type="radio" name="group9" id="item1" value="1"/>
+                        <label for="answer2">1</label><input type="radio" name="group9" id="item2" value="1"/>
+                        <label for="answer3">1</label><input type="radio" name="group9" id="item3" value="1"/>
+                        <label for="answer4">1</label><input type="radio" name="group9" id="item4" value="1"/>
+                    </div>
+                    <div id="checker">
+                        <img src="img/green_check.png" width="50px">
+                    </div>
+                </fieldset>
+                
+                 <fieldset class="question">
+                    <legend id="question">1 X 1</legend> 
+                    <div class="input-group">
+                        <label for="answer1">1</label><input type="radio" name="group10" id="item1" value="1"/>
+                        <label for="answer2">1</label><input type="radio" name="group10" id="item2" value="1"/>
+                        <label for="answer3">1</label><input type="radio" name="group10" id="item3" value="1"/>
+                        <label for="answer4">1</label><input type="radio" name="group10" id="item4" value="1"/>
+                    </div>
+                    <div id="checker">
+                        <img src="img/green_check.png" width="50px">
+                    </div>
+                </fieldset>
+                <input type="button" value="Submit" onclick="validateAnswer(event)">
+             </form>
+         </div>
+         
+         <div id="scoreboard">
+            <p id="numQuestions">Correct answers: 0 / 10 </p>
+             <p id="scoreUpdate">Current score is: 0</p>
+         </div>
+         
+         
+         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            var rangeNum = 0;
+        
+            var arra = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+            var answer = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+            var answerInd = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            
+            function updateTextInput(val) {
+                document.getElementById('textInput').value=val;
+                rangeNum = val;
+                for(var i=0; i<arra.length; i+=2){
+                    arra[i] = Math.floor(Math.random()*rangeNum) + 2;
+                    arra[i+1] = Math.floor(Math.random()*10) + 2;
+                }
+                updateQuestion();
+            }
+            
+            function updateQuestion() {
+                var text = "";
+                for(var i=0; i<arra.length; i+=2){
+                   text = arra[i]+ " X " + arra[i+1];
+                    answer[i/2] = arra[i] * arra[i+1];
+                    answerInd[i/2] = Math.floor(Math.random()*4);
+
+                    $(".question #question").eq(i/2).html(text);
+                    $(".question .input-group").eq(i/2).updateAns(answerInd[i/2], arra[i], arra[i+1]);
+                }
+            }
+            
+            function updateAnswer(obj, html_index, index, val1 ,val2) {
+                var $obj = $(obj);
+                for(var i=0; i<4; i++){
+                    var label= "answer" + i;
+                    if(i==index){
+                        $obj.eq(html_index).attr(label).val((val1*val2));
+                    }
+                }
+            }
+            
+            $.fn.updateAns = function updateAns(index, val1, val2){
+                this.each(function() {
+                    var label = "";
+                    for(var i=0; i<4; i++){
+                        console.log(label);
+                        label = "answer" + (i+1);
+                        if(i==index){
+                            $(this).find("label[for ="+label+"]").text(val1*val2);
+                        } else if (i%2==0) {
+                            var temp = 2;  
+                            do {
+                                temp = val1*(Math.floor(Math.random()*val2)+2);
+                            } while(temp == (val1*val2));
+                           
+                            $(this).find("label[for ="+label+"]").text(temp);
+                        } else {
+                            var temp = 2;
+                            do {
+                                temp = val2*(Math.floor(Math.random()*val1)+2)
+                            } while(temp == (val1*val2));
+                            
+                            $(this).find("label[for ="+label+"]").text(temp);
+                        }
+                    }
+                });
+            };
+            
+            
+            function validateAnswer() {
+                var score = 0;
+                for(var i=1; i<=10; i++){
+                    var answerChoices = ("group" + i);
+                    var selectedChoice = document.getElementsByName(answerChoices);
+                    if(selectedChoice[answerInd[i-1]].checked){
+                        console.log("You got " + (i-1) + " right!");
+                        score++;
+                        $(".question #checker img").eq(i-1).attr("src","img/green_check.png");
+                    } else {
+                        $(".question #checker img").eq(i-1).attr("src","img/red_check.png");
+                    }
+                }
+                document.getElementById('numQuestions').innerHTML= "Correct answers: " + score +"/10";
+                score = (score / 10) * 100;
+                document.getElementById('scoreUpdate').innerHTML= "Current score is: " + score +"%";
+            }
+            
+        </script>
+    </body>
+</html>
