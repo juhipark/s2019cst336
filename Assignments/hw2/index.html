@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Disney Personality Quiz </title>
+         <link href="css/styles.css" rel="stylesheet" type="text/css" />
+         <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy|Patrick+Hand" rel="stylesheet">
+         
+    </head>
+    <body>
+        <span id="disney"><img src="img/disney.png" height=100px alt="Disney Display"></span>
+        <h1>Disney Personality Quiz</h1>
+        
+        <div id="quiz-content">
+        
+            <form method="GET" action="result.html">        
+                <h2>Pick your favorite color</h2>
+                <input type="color" name="color" value="#ffffff">
+                <hr>
+                
+                <h2>Select your birth month</h2>
+                <input type="month" name="month">
+                <hr>
+
+                <h2>Pick your favorite icecream</h2>
+                     <div id="radio-container">
+                        <label class="container">Banana Split
+                            <input type="radio" checked="checked" name="icecream" value="banana">
+                            <span class="checkmark"></span>
+                        </label>
+                        <br>
+                        <label class="container">Shave Ice
+                            <input type="radio" name="icecream" value="shave">
+                            <span class="checkmark"></span>
+                        </label>
+                        <br>
+                        <label class="container">Mochi Icecream
+                            <input type="radio" name="icecream" value="mochi">
+                            <span class="checkmark"></span>
+                        </label>
+                        <br>
+                        <label class="container">Milk Shake
+                            <input type="radio" name="icecream" value="milk">
+                            <span class="checkmark"></span>
+                        </label>
+                        <br>
+                    </div>
+                <hr>
+                
+                <h2>What discribes you the most</h2>
+                <span class="leftlabel">Extrovert</span>
+                <input type="range" min="1" max="10" name="personality" class="slider">
+                <span class="rightlabel">Introvert</span>
+                <hr>
+                
+                <h2>Pick your favorite Disney sidekick</h2>
+                    <div id="input-image">
+                        <div id="row1">
+                            <img id="frog" class="animal-img" src="img/frog.jpg" height="300px" width="300px" onclick="imgClick(this.id);">
+                            <img id="pig" class="animal-img" src="img/pig.jpg" height="300px" width="300px" onclick="imgClick(this.id);">
+                        </div>
+                        <div id="row2">
+                            <img id="olaf" class="animal-img" src="img/olaf.jpg" height="300px" width="300px" onclick="imgClick(this.id);">
+                            <img id="mushu" class="animal-img" src="img/mushu.jpg" height="300px" width="300px" onclick="imgClick(this.id);">
+                        </div>
+                    </div>
+                <br>
+                <input type="submit" name="submit" value="Send data">
+            </form>
+            <br><br>
+        </div>
+        
+        <br><br>
+        <footer>
+            <hr> 
+            <div id="copyright">
+                CST336 2019&copy; Juhi Park <br />
+                <strong>Disclaimer:</strong> "Fair use" for purposes of education 
+            </div>
+        </footer>
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            
+            function imgClick(imgId){
+                 console.log(imgId);
+                // $(imgId).not(this).css("border-color", "red");
+                // $(imgId).not(this).css("z-index", 0);
+                // $(this).css("z-index", 100);
+                var x = document.querySelectorAll(".animal-img");
+                for(var i=0; i<4; i++){
+                    x[i].style.border = "2px solid #B9DFFF"
+                }
+                var obj = document.getElementById(imgId);
+                obj.style.border = "8px solid #008F95";
+            }
+        </script>
+    </body>
+</html>

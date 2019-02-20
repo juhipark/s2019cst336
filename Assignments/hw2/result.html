@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Result </title>         
+        
+        <link href="css/styles.css" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Luckiest+Guy|Patrick+Hand" rel="stylesheet">
+    </head>
+    <body>
+        <h1>Quiz Result</h1>
+        <div id="result-content">
+            <h2 id="result"></h2>
+            <img id="poster">
+            <span id="vidoe"></span>
+        </div>
+            <form method="GET" action="index.html">
+                <input type="submit" name="submit" value="Return">
+            </form>
+            
+        
+          <footer>
+            <hr>
+            <div id="copyright">
+                CST336 2019&copy; Juhi Park <br />
+                <strong>Disclaimer:</strong> "Fair use" for purposes of education 
+            </div>
+        </footer>
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+        
+        function HEXToVBColor(rrggbb) {
+            var bbggrr = rrggbb.substr(4, 2) + rrggbb.substr(2, 2) + rrggbb.substr(0, 2);
+            return parseInt(bbggrr, 16);
+        }
+          function getName(c, month, icecream, personality) {
+              
+              console.log(c.substring(1));
+              color = HEXToVBColor(c.substring(1));
+              console.log(color);
+              
+              var names = ["tiana", "moana", "mulan", "elsa"];
+              var tiana_counter = 0, moana_counter = 0, mulan_counter = 0, elsa_counter = 0;
+              
+              var i = Math.floor(Math.random()*4);
+              
+              
+              
+              
+              return names[i];
+          }
+          
+          function validateData() {
+              console.log(location.search);
+    		var parameters = location.search.substring(1).split("&");
+            console.log(parameters);
+    		var temp = parameters[0].split("=");
+    		color = unescape(temp[1]);
+            console.log(color);
+             console.log(typeof(color));
+              
+
+    		temp = parameters[1].split("=");
+    		month = unescape(temp[1].split("-")[1]);
+    
+            temp = parameters[2].split("=");
+            icecream = unescape(temp[1]);
+            console.log(icecream)
+            
+            temp = parameters[3].split("=");
+            personality = unescape(temp[1]);
+            
+           var disneyResult = getName(color, month, icecream, personality);
+           console.log(disneyResult);
+            document.getElementById("result").innerHTML = "You got: " + disneyResult + " !";
+    		document.getElementById("poster").src = "img/" + disneyResult +".jpg";
+        }
+        validateData();
+            
+        </script>
+    </body>
+</html>
