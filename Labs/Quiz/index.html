@@ -17,7 +17,7 @@
             <div id="range-div">
                 <p id="range-font" style="font-size: 1.8em">First, Select 2~11 range for multiplication (eg. 9x9)</p>
                 <form>
-                    <input type="range" name="rangeInput" value ="2" min="2" max="10" onchange="updateTextInput(this.value);">
+                    <input type="range" name="rangeInput" value ="2" min="2" max="11" onchange="updateTextInput(this.value);">
                     <input type="text" id="textInput" value="2">
                 </form>
             </div>
@@ -243,7 +243,10 @@
                 });
             };
             
-            
+            function timedRefresh(timeoutPeriod) {
+	            setTimeout("location.reload(true);",timeoutPeriod);
+            }
+
             function validateAnswer() {
                 var score = 0;
                 for(var i=1; i<=10; i++){
@@ -267,6 +270,10 @@
                     document.getElementById('congratulatoryMessage').innerHTML= "Try again! You got LESS than 90%!";
                     document.getElementById('scoreboard').style.background = "red";
                 }
+                
+                
+                // refreshed the page after 3 seconds
+                //window.onload = timedRefresh(3000);
             }
             
         </script>
