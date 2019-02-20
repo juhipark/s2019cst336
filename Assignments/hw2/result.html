@@ -33,45 +33,49 @@
             var bbggrr = rrggbb.substr(4, 2) + rrggbb.substr(2, 2) + rrggbb.substr(0, 2);
             return parseInt(bbggrr, 16);
         }
+            // Result: Data is processed according to user's icecream selection choice
           function getName(c, month, icecream, personality) {
-              
-              console.log(c.substring(1));
-              color = HEXToVBColor(c.substring(1));
-              console.log(color);
-              
+            //   color = HEXToVBColor(c.substring(1));
+
               var names = ["tiana", "moana", "mulan", "elsa"];
-              var tiana_counter = 0, moana_counter = 0, mulan_counter = 0, elsa_counter = 0;
+            //   var tiana_counter = 0, moana_counter = 0, mulan_counter = 0, elsa_counter = 0;
+            
+            
+              if(icecream=="banana") {
+                  return "tiana";
+              } else if(icecream=="shave") {
+                  return "moana";
+              } else if(icecream=="mochi") {
+                  return "mulan";
+              } else if(icecream=="elsa") {
+                  return "elsa";
+              }
               
+            //   random selection of image
               var i = Math.floor(Math.random()*4);
-              
-              
               
               
               return names[i];
           }
           
           function validateData() {
-              console.log(location.search);
     		var parameters = location.search.substring(1).split("&");
-            console.log(parameters);
     		var temp = parameters[0].split("=");
     		color = unescape(temp[1]);
-            console.log(color);
-             console.log(typeof(color));
+            // console.log(color);
+            // console.log(typeof(color));
               
-
     		temp = parameters[1].split("=");
     		month = unescape(temp[1].split("-")[1]);
     
             temp = parameters[2].split("=");
             icecream = unescape(temp[1]);
-            console.log(icecream)
-            
+
             temp = parameters[3].split("=");
             personality = unescape(temp[1]);
             
            var disneyResult = getName(color, month, icecream, personality);
-           console.log(disneyResult);
+
             document.getElementById("result").innerHTML = "You got: " + disneyResult + " !";
     		document.getElementById("poster").src = "img/" + disneyResult +".jpg";
         }

@@ -23,23 +23,23 @@
 
                 <h2>Pick your favorite icecream</h2>
                      <div id="radio-container">
-                        <label class="container">Banana Split
-                            <input type="radio" checked="checked" name="icecream" value="banana">
+                        <label class="container" for="banana">Banana Split
+                            <input type="radio" id="banana" checked="checked" name="icecream" value="banana">
                             <span class="checkmark"></span>
                         </label>
                         <br>
-                        <label class="container">Shave Ice
-                            <input type="radio" name="icecream" value="shave">
+                        <label class="container" for="shave">Shave Ice
+                            <input type="radio" id="shave" name="icecream" value="shave">
                             <span class="checkmark"></span>
                         </label>
                         <br>
-                        <label class="container">Mochi Icecream
-                            <input type="radio" name="icecream" value="mochi">
+                        <label class="container" for="mochi">Mochi Icecream
+                            <input type="radio" id="mochi" name="icecream" value="mochi">
                             <span class="checkmark"></span>
                         </label>
                         <br>
-                        <label class="container">Milk Shake
-                            <input type="radio" name="icecream" value="milk">
+                        <label class="container" for="milk">Milk Shake
+                            <input type="radio" id="milk" name="icecream" value="milk">
                             <span class="checkmark"></span>
                         </label>
                         <br>
@@ -55,12 +55,20 @@
                 <h2>Pick your favorite Disney sidekick</h2>
                     <div id="input-image">
                         <div id="row1">
-                            <img id="frog" class="animal-img" src="img/frog.jpg" height="300px" width="300px" onclick="imgClick(this.id);">
-                            <img id="pig" class="animal-img" src="img/pig.jpg" height="300px" width="300px" onclick="imgClick(this.id);">
+                            <label for="image1">
+                                <img id="frog" class="animal-img" src="img/frog.jpg" height="300px" width="300px" onclick="imgClick(this.id);">
+                            </label>
+                            <label for="image1">
+                                <img id="pig" class="animal-img" src="img/pig.jpg" height="300px" width="300px" onclick="imgClick(this.id);">
+                            </label>
                         </div>
                         <div id="row2">
-                            <img id="olaf" class="animal-img" src="img/olaf.jpg" height="300px" width="300px" onclick="imgClick(this.id);">
-                            <img id="mushu" class="animal-img" src="img/mushu.jpg" height="300px" width="300px" onclick="imgClick(this.id);">
+                            <label for="image1">
+                                <img id="olaf" class="animal-img" src="img/olaf.jpg" height="300px" width="300px" onclick="imgClick(this.id);">
+                            </label>
+                            <label for="image1">
+                                <img id="mushu" class="animal-img" src="img/mushu.jpg" height="300px" width="300px" onclick="imgClick(this.id);">
+                            </label>
                         </div>
                     </div>
                 <br>
@@ -82,10 +90,7 @@
         <script type="text/javascript">
             
             function imgClick(imgId){
-                 console.log(imgId);
-                // $(imgId).not(this).css("border-color", "red");
-                // $(imgId).not(this).css("z-index", 0);
-                // $(this).css("z-index", 100);
+                //  console.log(imgId);
                 var x = document.querySelectorAll(".animal-img");
                 for(var i=0; i<4; i++){
                     x[i].style.border = "2px solid #B9DFFF"
