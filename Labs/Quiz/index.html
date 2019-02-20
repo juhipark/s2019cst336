@@ -213,32 +213,31 @@
                         label = "answer" + (i+1);
                         if(i==index){
                             $(this).find("label[for ="+label+"]").text(val1*val2);
-                        } else {
-                            var temp = val1*(Math.floor(Math.random()*11)+2);
-                            console.log(hashSet.has(temp));
-                            while (hashSet.has(temp) || temp == (val1*val2)) {
-                                 temp = val1*(Math.floor(Math.random()*val2)+2);
-                            }
-                            
-                            hashSet.add(temp);
-                            $(this).find("label[for ="+label+"]").text(temp);
-                         }
-                         
-                         //else if (i%2==0) {
-                        //     var temp = 2;  
-                        //     do {
-                        //         temp = val1*(Math.floor(Math.random()*val2)+2);
-                        //     } while(temp == (val1*val2));
-                           
-                        //     $(this).find("label[for ="+label+"]").text(temp);
                         // } else {
-                        //     var temp = 2;
-                        //     do {
-                        //         temp = val2*(Math.floor(Math.random()*val1)+2)
-                        //     } while(temp == (val1*val2));
+                        //     var temp = val1*(Math.floor(Math.random()*11)+2);
+                        //     console.log(hashSet.has(temp));
+                        //     while (hashSet.has(temp) || temp == (val1*val2)) {
+                        //          temp = val1*(Math.floor(Math.random()*val2)+2);
+                        //     }
                             
+                        //     hashSet.add(temp);
                         //     $(this).find("label[for ="+label+"]").text(temp);
-                        // }
+                         }
+                         else if (i%2==0) {
+                            var temp = 2;  
+                            do {
+                                temp = val1*(Math.floor(Math.random()*val2)+2);
+                            } while(temp == (val1*val2));
+                           
+                            $(this).find("label[for ="+label+"]").text(temp);
+                        } else {
+                            var temp = 2;
+                            do {
+                                temp = val2*(Math.floor(Math.random()*val1)+2)
+                            } while(temp == (val1*val2));
+                            
+                            $(this).find("label[for ="+label+"]").text(temp);
+                        }
                     }
                 });
             };
