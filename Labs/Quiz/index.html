@@ -14,12 +14,13 @@
         </div>
         
         <div id="content">
-            <p>First, Select 2~11 range for multiplication (eg. 9x9)</p>
-            <form>
-                <input type="range" name="rangeInput" value ="2" min="2" max="10" onchange="updateTextInput(this.value);">
-                <input type="text" id="textInput" value="2">
-            </form>
-            
+            <div id="range-div">
+                <p id="range-font" style="font-size: 1.8em">First, Select 2~11 range for multiplication (eg. 9x9)</p>
+                <form>
+                    <input type="range" name="rangeInput" value ="2" min="2" max="10" onchange="updateTextInput(this.value);">
+                    <input type="text" id="textInput" value="2">
+                </form>
+            </div>
             <p>Click on one of the text labels to answer: </p>
             
             <form>
@@ -32,7 +33,7 @@
                         <label for="answer4">1</label><input type="radio" name="group1" id="item4" value="1"/>
                     </div>
                     <div id="checker">
-                        <img src="img/green_check.png" width="50px">
+                        <img src="" width="50px">
                     </div>
                 </fieldset>
                 
@@ -45,7 +46,7 @@
                         <label for="answer4">1</label><input type="radio" name="group2" id="item4" value="1"/>
                     </div>
                     <div id="checker">
-                        <img src="img/green_check.png" width="50px">
+                        <img src="" width="50px">
                     </div>
                 </fieldset>
                 
@@ -58,7 +59,7 @@
                         <label for="answer4">1</label><input type="radio" name="group3" id="item4" value="1"/>
                     </div>
                     <div id="checker">
-                        <img src="img/green_check.png" width="50px">
+                        <img src="" width="50px">
                     </div>
                 </fieldset>
                 
@@ -71,7 +72,7 @@
                         <label for="answer4">1</label><input type="radio" name="group4" id="item4" value="1"/>
                     </div>
                     <div id="checker">
-                        <img src="img/green_check.png" width="50px">
+                        <img src="" width="50px">
                     </div>
                 </fieldset>
                 
@@ -84,7 +85,7 @@
                         <label for="answer4">1</label><input type="radio" name="group5" id="item4" value="1"/>
                     </div>
                     <div id="checker">
-                        <img src="img/green_check.png" width="50px">
+                        <img src="" width="50px">
                     </div>
                 </fieldset>
                 
@@ -97,7 +98,7 @@
                         <label for="answer4">1</label><input type="radio" name="group6" id="item4" value="1"/>
                     </div>
                     <div id="checker">
-                        <img src="img/green_check.png" width="50px">
+                        <img src="" width="50px">
                     </div>
                 </fieldset>
                 
@@ -110,7 +111,7 @@
                         <label for="answer4">1</label><input type="radio" name="group7" id="item4" value="1"/>
                     </div>
                     <div id="checker">
-                        <img src="img/green_check.png" width="50px">
+                        <img src="" width="50px">
                     </div>
                 </fieldset>
                 
@@ -123,7 +124,7 @@
                         <label for="answer4">1</label><input type="radio" name="group8" id="item4" value="1"/>
                     </div>
                     <div id="checker">
-                        <img src="img/green_check.png" width="50px">
+                        <img src="" width="50px">
                     </div>
                 </fieldset>
                 
@@ -136,7 +137,7 @@
                         <label for="answer4">1</label><input type="radio" name="group9" id="item4" value="1"/>
                     </div>
                     <div id="checker">
-                        <img src="img/green_check.png" width="50px">
+                        <img src="" width="50px">
                     </div>
                 </fieldset>
                 
@@ -149,7 +150,7 @@
                         <label for="answer4">1</label><input type="radio" name="group10" id="item4" value="1"/>
                     </div>
                     <div id="checker">
-                        <img src="img/green_check.png" width="50px">
+                        <img src="" width="50px">
                     </div>
                 </fieldset>
                 <input type="button" value="Submit" onclick="validateAnswer(event)">
@@ -203,30 +204,41 @@
                     }
                 }
             }
-            
             $.fn.updateAns = function updateAns(index, val1, val2){
                 this.each(function() {
+                    var hashSet = new Set();
                     var label = "";
                     for(var i=0; i<4; i++){
                         console.log(label);
                         label = "answer" + (i+1);
                         if(i==index){
                             $(this).find("label[for ="+label+"]").text(val1*val2);
-                        } else if (i%2==0) {
-                            var temp = 2;  
-                            do {
-                                temp = val1*(Math.floor(Math.random()*val2)+2);
-                            } while(temp == (val1*val2));
-                           
-                            $(this).find("label[for ="+label+"]").text(temp);
                         } else {
-                            var temp = 2;
-                            do {
-                                temp = val2*(Math.floor(Math.random()*val1)+2)
-                            } while(temp == (val1*val2));
+                            var temp = val1*(Math.floor(Math.random()*11)+2);
+                            console.log(hashSet.has(temp));
+                            while (hashSet.has(temp) || temp == (val1*val2)) {
+                                 temp = val1*(Math.floor(Math.random()*val2)+2);
+                            }
                             
+                            hashSet.add(temp);
                             $(this).find("label[for ="+label+"]").text(temp);
-                        }
+                         }
+                         
+                         //else if (i%2==0) {
+                        //     var temp = 2;  
+                        //     do {
+                        //         temp = val1*(Math.floor(Math.random()*val2)+2);
+                        //     } while(temp == (val1*val2));
+                           
+                        //     $(this).find("label[for ="+label+"]").text(temp);
+                        // } else {
+                        //     var temp = 2;
+                        //     do {
+                        //         temp = val2*(Math.floor(Math.random()*val1)+2)
+                        //     } while(temp == (val1*val2));
+                            
+                        //     $(this).find("label[for ="+label+"]").text(temp);
+                        // }
                     }
                 });
             };

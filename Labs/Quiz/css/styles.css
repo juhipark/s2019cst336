@@ -27,6 +27,10 @@ h1 {
     /*color: #A9A9A9;*/
     color: white;
 }
+#range-div {
+    font-size: 5em;
+    
+}
 #scoreboard {
     float: right;
     width: 35%;
