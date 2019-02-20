@@ -153,7 +153,7 @@
                         <img src="" width="50px">
                     </div>
                 </fieldset>
-                <input type="button" value="Submit" onclick="validateAnswer(event)">
+                <input type="button" value="Submit"> 
              </form>
          </div>
          
@@ -209,7 +209,6 @@
                     var hashSet = new Set();
                     var label = "";
                     for(var i=0; i<4; i++){
-                        console.log(label);
                         label = "answer" + (i+1);
                         if(i==index){
                             $(this).find("label[for ="+label+"]").text(val1*val2);
@@ -245,8 +244,7 @@
             function timedRefresh(timeoutPeriod) {
 	            setTimeout("location.reload(true);",timeoutPeriod);
             }
-
-            function validateAnswer() {
+            $("input[type=button]").click(function(){
                 var score = 0;
                 for(var i=1; i<=10; i++){
                     var answerChoices = ("group" + i);
@@ -259,9 +257,9 @@
                         $(".question #checker img").eq(i-1).attr("src","img/red_check.png");
                     }
                 }
-                document.getElementById('numQuestions').innerHTML= "Correct answers: " + score +"/10";
+                $("#numQuestions").html("Correct answers: " + score +"/10");
                 score = (score / 10) * 100;
-                document.getElementById('scoreUpdate').innerHTML= "Current score is: " + score +"%";
+                $("#scoreUpdate").html("Current score is: " + score +"%");
                 if(score >= 90) {
                     document.getElementById('congratulatoryMessage').innerHTML= "GREAT! You got MORE than 90%!";
                     document.getElementById('scoreboard').style.background = "green";
@@ -269,11 +267,9 @@
                     document.getElementById('congratulatoryMessage').innerHTML= "Try again! You got LESS than 90%!";
                     document.getElementById('scoreboard').style.background = "red";
                 }
-                
-                
                 // refreshed the page after 3 seconds
                 //window.onload = timedRefresh(3000);
-            }
+            });
             
         </script>
     </body>
