@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Google Image API </title>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+
+        <form method="post">
+            <input type="text" value="Apple">
+            <button type="button" id="submit-button">Search</button>
+        </form>
+        
+        <div id="searchResult"></div>
+        
+    </body>
+    <script>
+        $("#submit-button").click(function() {
+            var apikey = "AIzaSyBmq9mnZCsSskO5w6vcC860tRYoT4OUoWU";
+            var cx = "014669016936137636927:fbwukd53zgm";
+            var q = "Apple";
+            $.ajax({
+                type: "get",
+                url: "https://www.googleapis.com/customsearch/v1",
+                dataType: "json",
+                data: {
+                    "key": apikey,
+                    "cx": cx,
+                    "q": q
+                },
+                success: function(data, status) {
+                    //console.log(arguments);
+                    var data = arguments[0];
+                    console.log(data);
+
+                    $("#searchResult").html("Search result: ");
+                    // for(var elem in data[])
+
+                },
+                complete: function(data, status) { //optional, used for debugging purposes
+                    console.log(status);
+                }
+            });
+
+        });
+ 
+        
+    
+    </script>
+    
+</html>
