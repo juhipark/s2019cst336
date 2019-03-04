@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Practice 5: Like/Dislike Video App</title>
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+</head>
+
+<body>
+
+  <iframe id="video" src=""></iframe>
+  <!--Embed here any YouTube video using the "iframe" tag -->
+
+  <div id="like-dislike">
+    <div id="comSect"> <button id="getC" width="35">Get Comments</button>
+      <div id="comments">
+
+      </div>
+    </div>
+
+    <button id="like_btn">
+      <img src="img/like.png" alt="Like button" width="35" />
+    </button>
+    <!--The number of likes is displayed within the span below-->
+    <span id="likes"></span>
+    <button id="dislike_btn">
+      <img src="img/dislike.png" alt="Dislike buttonx" width="35" />
+    </button>
+    <span id="dislikes"></span>
+  </div>
+
+</body>
+<script>
+  //Enter a YouTube video id for "data".
+
+  //   dislikes: "49"
+  // id: "53"
+  // likes: "1056"
+  // youtubeId: "hHXvi_oyMoo"
+  $.ajax({
+    type: "get",
+    url: "https://cst336.herokuapp.com/projects/api/videoLikesAPI.php",
+    dataType: "json",
+    data: {
+      "videoId": "hHXvi_oyMoo"
+    }, //   <----AS THE VALUE, ENTER THE YOUTUBE VIDEO ID
+
+    success: function(data, status) {
+      console.log(data);
+      // "//www.youtube.com/embed/"+videoID
+      var videolink = "https://www.youtube.com/embed/" + data.youtubeId;
+      // console.log(videolink);
+      $("#video").attr('src', videolink);
+
+      $("#like-dislike #likes").html(data.likes);
+      $("#like-dislike #dislikes").html(data.dislikes);
+
+    },
+    complete: function(data, status) {
+      //alert(status);
+    }
+  });
+
+  $("#getC").click(function(e) {
+    $("#comments").empty();
+    $.ajax({
+      type: "get",
+      url: "https://cst336.herokuapp.com/projects/api/videoLikesAPI.php?videoId=hHXvi_oyMoo&action=comments",
+      dataType: "json",
+      data: {
+
+      }, //   <----AS THE VALUE, ENTER THE YOUTUBE VIDEO ID
+
+      success: function(data, status) {
+
+        for (var i = 0; i < data.length; i++) {
+          var name = data[i].author
+          var info = " " + data[i].date;
+
+          var com = data[i].comment;
+          // $("#comments").append('<b>More info</b>');
+
+          // '<b>More info</b>'
+          $("#comments").append(" <br/>" + '<b>' + name + '</b>' + info + " <br/>");
+          $("#comments").append(com + "<br/>");
+
+
+        }
+        // "//www.youtube.com/embed/"+videoID
+      }
+
+    });
+  });
+
+  var likeClicked = false;
+  var dislikeClicked = false;
+
+  function handleLikeDislikeClick(e) {
+
+    var actionVal = "";
+    e.preventDefault();
+    // var target = $(e.target).attr('id');
+    // console.log(target);
+    // console.log($(this).attr('id'));
+    // console.log(target.attr("src", "img/cancel_dislike.png"));
+
+    //check cases: both like and dislike is never been clicked
+    if (($(this).attr('id') == "like_btn") && !likeClicked && !dislikeClicked) {
+      //Action = like
+      likeClicked = true;
+      dislikeClicked = false;
+      $("#like_btn img").attr('src', "img/cancel_like.png");
+      actionVal = "like";
+    }
+    else if (($(this).attr('id') == "like_btn") && likeClicked && !dislikeClicked) {
+      //Action = Cancel like
+      likeClicked = false;
+      dislikeClicked = false;
+      $("#like_btn img").attr('src', "img/like.png");
+      actionVal = "cancel_like";
+    }
+    else if (($(this).attr('id') == "dislike_btn") && !likeClicked && !dislikeClicked) {
+      likeClicked = false;
+      dislikeClicked = true;
+      $("#dislike_btn img").attr('src', "img/cancel_dislike.png");
+      actionVal = "dislike";
+    }
+    else if (($(this).attr('id') == "dislike_btn") && !likeClicked && dislikeClicked) {
+      //Action = Cancel dislike
+      likeClicked = false;
+      dislikeClicked = false;
+      $("#dislike_btn img").attr('src', "img/dislike.png");
+      actionVal = "cancel_dislike";
+    }
+
+    //call ajax
+    $.ajax({
+      type: "get",
+      url: "https://cst336.herokuapp.com/projects/api/videoLikesAPI.php",
+      dataType: "json",
+      data: {
+        "videoId": "hHXvi_oyMoo",
+        "action": actionVal
+      }, //   <----AS THE VALUE, ENTER THE YOUTUBE VIDEO ID
+
+      success: function(data, status) {
+        $("#like-dislike #likes").html(data.likes);
+        $("#like-dislike #dislikes").html(data.dislikes);
+
+      },
+      complete: function(data, status) {
+        //alert(status);
+      }
+    });
+
+  }
+
+  //This AJAX call returns a number of "likes" and "dislikes"
+  $("#like_btn").on('click', handleLikeDislikeClick);
+  $("#dislike_btn").on('click', handleLikeDislikeClick);
+</script>
+
+</html>
