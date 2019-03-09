@@ -44,6 +44,9 @@
         </fieldset>
     </form>
     <script>
+        
+    
+    
         $("#button").click(function() {
             var password = $("#pswd").val();
             var confirm = $("#pswd1").val();
@@ -69,15 +72,14 @@
                     "zip": $("#zip1").val()
                 },
                 success: function() {
-                    // console.log(arguments);
+                    console.log(arguments);
                     var data = arguments[0];
-                    
-                    $("#found").hide();
-                    if ($("#zip1").val() == data[0]) {
+                    // $("#found").hide();
+                    if ($("#zip1").val() == data["zip"]) {
                         $("#found").hide();
-                        $("#city label").text(data[1]);
-                        $("#latitude label").text(data[5]);
-                        $("#longitude label").text(data[6]);
+                        $("#city label").text(data["city"]);
+                        $("#latitude label").text(data["latitude"]);
+                        $("#longitude label").text(data["longitude"]);
                     }
                     else {
                          $("#city label").text("");
