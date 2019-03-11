@@ -74,13 +74,12 @@
             var password = $("#pswd").val();
             var confirm = $("#pswd1").val();
 
-            console.log($("#pswd").val());
-            console.log($("#pswd1").val());
             if (password!="" && password != confirm) {
                 $("#passV").show();
                 console.log("same");
             }else{
                 $("#signUpForm").trigger("reset");
+                alert("Submission Form Successful!");
                 // $('input[name="submitB"]').prop("type", "submit");
                 window.scrollTo(0, 0);
                 // location.reload();
