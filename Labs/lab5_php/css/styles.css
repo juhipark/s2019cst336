@@ -32,17 +32,11 @@ label{
 
 #passw{
     position: relative;
-    width: 400px;
-    height: 200px;
     margin: auto;
 }
 #suggested {
     position: absolute;
     border:dashed;
-    top: 80px;
-    right: 50;
-    width: 200px;
-    height: 100px;
 }
 #button {
   font-family: 'Alegreya', serif;
