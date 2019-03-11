@@ -1,5 +1,11 @@
 <?php
-  session_start();
+    session_start();
+    $_SESSION[] = "bar";
+    $_SESSION[] = "id";
+    $_SESSION[] = "ID";
+    $_SESSION[] = "foo";
+    $_SESSION[] = "user";
+  
 
     $httpMethod = strtoupper($_SERVER['REQUEST_METHOD']);
 
@@ -15,37 +21,41 @@
         header("Access-Control-Allow-Origin: *");
         // Let the client know the format of the data being returned
         header("Content-Type: application/json");
-
-        // TODO: do stuff to get the $results which is an associative array
-        $results = array();
         
-        /********push something **********/ 
-        // $_SOMETHING ---> is super global
-        array_push($results, $_GET["something"]);
-
         // Sending back down as JSON
-        echo json_encode($results);
+        switch(true){
+          case isset($_GET['userID']):
+            $result = array($_SESSION, array("User Name GET method", $_GET['userID']));
+            break;
+          case isset($_GET['passWord']):
+            $result = array($_SESSION, array("Pass Word GET method"));
+            break;
+          default:
+            $result = array($_SESSION, array("Default GET method"));
+            break;
+        }
+        echo json_encode($result);
 
         break;
       case 'POST':
         // Get the body json that was sent
         $rawJsonString = file_get_contents("php://input");
-
-        //var_dump($rawJsonString);
-
+        
         // Make it a associative array (true, second param)
         $jsonData = json_decode($rawJsonString, true);
-
-        // TODO: do stuff to get the $results which is an associative array
-        $results = array();
 
         // Allow any client to access
         header("Access-Control-Allow-Origin: *");
         // Let the client know the format of the data being returned
         header("Content-Type: application/json");
-
+  
+  
+        // TODO: Update my user ID list, which is a session
+        $result = $_POST["userID"];
+        $_SESSION[] = $result;
+        $result = array($_SESSION, array("POST method"));
         // Sending back down as JSON
-        echo json_encode($results);
+        echo json_encode($result);
 
         break;
       case 'PUT':

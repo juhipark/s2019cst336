@@ -1,0 +1,56 @@
+[11-Mar-2019 06:28:38 UTC] PHP Warning:  json_encode() expects parameter 2 to be long, string given in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 48
+[11-Mar-2019 06:28:38 UTC] PHP Stack trace:
+[11-Mar-2019 06:28:38 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:0
+[11-Mar-2019 06:28:38 UTC] PHP   2. json_encode() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:48
+[11-Mar-2019 06:28:38 UTC] PHP Warning:  json_encode() expects parameter 2 to be long, string given in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 48
+[11-Mar-2019 06:28:38 UTC] PHP Stack trace:
+[11-Mar-2019 06:28:38 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:0
+[11-Mar-2019 06:28:38 UTC] PHP   2. json_encode() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:48
+[11-Mar-2019 06:28:39 UTC] PHP Warning:  json_encode() expects parameter 2 to be long, string given in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 48
+[11-Mar-2019 06:28:39 UTC] PHP Stack trace:
+[11-Mar-2019 06:28:39 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:0
+[11-Mar-2019 06:28:39 UTC] PHP   2. json_encode() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:48
+[11-Mar-2019 06:28:39 UTC] PHP Warning:  json_encode() expects parameter 2 to be long, string given in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 48
+[11-Mar-2019 06:28:39 UTC] PHP Stack trace:
+[11-Mar-2019 06:28:39 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:0
+[11-Mar-2019 06:28:39 UTC] PHP   2. json_encode() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:48
+[11-Mar-2019 07:04:33 UTC] PHP Fatal error:  Cannot use [] for reading in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 65
+[11-Mar-2019 07:04:33 UTC] PHP Fatal error:  Cannot use [] for reading in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 65
+[11-Mar-2019 07:04:33 UTC] PHP Fatal error:  Cannot use [] for reading in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 65
+[11-Mar-2019 07:04:33 UTC] PHP Fatal error:  Cannot use [] for reading in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 65
+[11-Mar-2019 07:04:48 UTC] PHP Fatal error:  Cannot use [] for reading in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 65
+[11-Mar-2019 07:04:48 UTC] PHP Fatal error:  Cannot use [] for reading in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 65
+[11-Mar-2019 07:04:49 UTC] PHP Fatal error:  Cannot use [] for reading in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 65
+[11-Mar-2019 07:04:49 UTC] PHP Fatal error:  Cannot use [] for reading in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 65
+[11-Mar-2019 07:05:15 UTC] PHP Fatal error:  Cannot use [] for reading in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 55
+[11-Mar-2019 07:05:15 UTC] PHP Fatal error:  Cannot use [] for reading in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 55
+[11-Mar-2019 07:05:16 UTC] PHP Fatal error:  Cannot use [] for reading in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 55
+[11-Mar-2019 07:05:16 UTC] PHP Fatal error:  Cannot use [] for reading in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 55
+[11-Mar-2019 07:15:08 UTC] PHP Warning:  json_encode() expects parameter 2 to be long, string given in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 26
+[11-Mar-2019 07:15:08 UTC] PHP Stack trace:
+[11-Mar-2019 07:15:08 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:0
+[11-Mar-2019 07:15:08 UTC] PHP   2. json_encode() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:26
+[11-Mar-2019 07:15:09 UTC] PHP Warning:  json_encode() expects parameter 2 to be long, string given in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 26
+[11-Mar-2019 07:15:09 UTC] PHP Stack trace:
+[11-Mar-2019 07:15:09 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:0
+[11-Mar-2019 07:15:09 UTC] PHP   2. json_encode() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:26
+[11-Mar-2019 07:15:09 UTC] PHP Warning:  json_encode() expects parameter 2 to be long, string given in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 26
+[11-Mar-2019 07:15:09 UTC] PHP Stack trace:
+[11-Mar-2019 07:15:09 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:0
+[11-Mar-2019 07:15:09 UTC] PHP   2. json_encode() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:26
+[11-Mar-2019 07:15:09 UTC] PHP Warning:  json_encode() expects parameter 2 to be long, string given in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 26
+[11-Mar-2019 07:15:09 UTC] PHP Stack trace:
+[11-Mar-2019 07:15:09 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:0
+[11-Mar-2019 07:15:09 UTC] PHP   2. json_encode() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:26
+[11-Mar-2019 08:37:39 UTC] PHP Warning:  json_encode() expects parameter 2 to be long, array given in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 54
+[11-Mar-2019 08:37:39 UTC] PHP Stack trace:
+[11-Mar-2019 08:37:39 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:0
+[11-Mar-2019 08:37:39 UTC] PHP   2. json_encode() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:54
+[11-Mar-2019 08:38:43 UTC] PHP Warning:  json_encode() expects parameter 2 to be long, array given in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 54
+[11-Mar-2019 08:38:43 UTC] PHP Stack trace:
+[11-Mar-2019 08:38:43 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:0
+[11-Mar-2019 08:38:43 UTC] PHP   2. json_encode() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:54
+[11-Mar-2019 08:38:57 UTC] PHP Warning:  json_encode() expects parameter 2 to be long, array given in /home/ubuntu/workspace/Labs/lab5_php/userPwd.php on line 54
+[11-Mar-2019 08:38:57 UTC] PHP Stack trace:
+[11-Mar-2019 08:38:57 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:0
+[11-Mar-2019 08:38:57 UTC] PHP   2. json_encode() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:54
