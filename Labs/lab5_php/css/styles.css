@@ -37,6 +37,7 @@ label{
 #suggested {
     position: absolute;
     border:dashed;
+    margin: auto;
 }
 #button {
   font-family: 'Alegreya', serif;
