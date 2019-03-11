@@ -30,14 +30,10 @@ label{
 
 }
 
-#passw{
-    position: relative;
-    margin: auto;
-}
 #suggested {
-    position: absolute;
     border:dashed;
     margin: auto;
+
 }
 #button {
   font-family: 'Alegreya', serif;
