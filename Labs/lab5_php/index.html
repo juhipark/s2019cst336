@@ -39,6 +39,7 @@
             <div id="passWord">
                 <div id="passw"><label>Password: </label><input id="pswd" type="password">
                     <div id="suggested">Suggested: <span id="pSuggestTyped" style="font-size: 12px"></span><span id="pSuggestNew" style="font-size: 12px"></div>
+                    <p id="passDup" style="display:none; color:red">Password: Contains part of Username</p>
                 </div>
                 <div id="passw1"><label>Type Password Again: </label><input id="pswd1" type="password">
                     <p id="passV" style="display:none; color:red">Password: Does <strong>NOT</strong> match</p>
@@ -49,7 +50,8 @@
     </form>
     
     <script>
-        var submitEnable = false;
+        var submitEnableUser = false;
+        var submitEnableUserDupPass = false;
         $("#button").on("click", function() {
             //push the new userID input php session
             $.ajax({
@@ -73,11 +75,18 @@
             //check if the username provided is not part of the password
             var password = $("#pswd").val();
             var confirm = $("#pswd1").val();
-
-            if (password!="" && password != confirm) {
+            if (password=="" || password != confirm) {
                 $("#passV").show();
                 console.log("same");
-            }else{
+            }else if(!submitEnableUser){
+                console.log("username not matching");
+            }else if(!submitEnableUserDupPass){
+                console.log("Password and username has dupliacted");
+                
+            }
+            else{
+                console.log("%" + submitEnable);
+
                 $("#signUpForm").trigger("reset");
                 alert("Submission Form Successful!");
                 // $('input[name="submitB"]').prop("type", "submit");
@@ -154,14 +163,16 @@
                 },
                 success: function(data) {
                     console.log(data);
-                    for (var idx in data[0]) {
-                        console.log(idx);
-                        if (data[0][idx] == $("#usrId").val()) {
+                    for (var idx in data[0]["data"]) {
+                        // console.log(idx);
+                        if (data[0]["data"][idx] == $("#usrId").val()) {
                             $("#username1").hide();
                             $("#username2").show();
+                            submitEnableUser = false;
                             break;
                         }
                         else {
+                            submitEnableUser = true;
                             $("#username2").hide();
                             $("#username1").show();
                         }

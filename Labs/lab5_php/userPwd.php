@@ -1,11 +1,16 @@
 <?php
     session_start();
-    $_SESSION[] = "bar";
-    $_SESSION[] = "id";
-    $_SESSION[] = "ID";
-    $_SESSION[] = "foo";
-    $_SESSION[] = "user";
-  
+    //default
+    if (empty($_SESSION["data"])) {
+      $_SESSION["data"] = array();
+      $_SESSION["data"][] = "bar";
+      $_SESSION["data"][] = "id";
+      $_SESSION["data"][] = "ID";
+      $_SESSION["data"][] = "foo";
+      $_SESSION["data"][] = "user";
+    }
+    
+    
 
     $httpMethod = strtoupper($_SERVER['REQUEST_METHOD']);
 
@@ -52,7 +57,7 @@
   
         // TODO: Update my user ID list, which is a session
         $result = $_POST["userID"];
-        $_SESSION[] = $result;
+        $_SESSION["data"][] = $result;
         $result = array($_SESSION, array("POST method"));
         // Sending back down as JSON
         echo json_encode($result);
