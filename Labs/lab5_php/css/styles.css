@@ -33,7 +33,7 @@ label{
 #suggested {
     border:dashed;
     margin: auto;
-
+    width: 200px;
 }
 #button {
   font-family: 'Alegreya', serif;
