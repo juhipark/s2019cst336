@@ -84,10 +84,10 @@
                 console.log("same");
             }else if(!submitEnableUser){
                 console.log("username not matching");
-            }else if($("#whatContains").html()==""){
+            }else if($("#whatContains").html()!=""){
                 console.log("Password and username has dupliacted");
             }else{
-                console.log("%" + submitEnable);
+                console.log("%" + submitEnableUser);
                 
                 $("#signUpForm").trigger("reset");
                 alert("Submission Form Successful!");
