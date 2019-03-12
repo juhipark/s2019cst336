@@ -29,12 +29,19 @@ label{
     letter-spacing: 3px;
 
 }
+#whatContains, #contains{
+    font-family: 'ZCOOL QingKe HuangYou';
+    margin-left: 10px;
+    display: inline;
 
+}
 #suggested {
-    border:dashed;
+    border:1px dashed;
     margin: auto;
+
     width: 200px;
     padding: 3px;
+    font-family: 'ZCOOL QingKe HuangYou';
 }
 #button {
   font-family: 'Alegreya', serif;

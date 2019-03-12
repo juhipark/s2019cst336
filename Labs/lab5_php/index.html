@@ -10,13 +10,14 @@
     <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou" rel="stylesheet">
 
 </head>
 
 <body id="content">
     <h1> Sign Up Form </h1>
 
-    <form id="signUpForm"  action="userPwd.php" method="POST">
+    <form id="signUpForm" action="userPwd.php" method="POST">
         <fieldset>
             <legend>Sign Up</legend>
             <div><label>First Name: </label><input type="text"></div>
@@ -38,6 +39,9 @@
             </div>
             <div id="passWord">
                 <div id="passw"><label>Password: </label><input id="pswd" type="password">
+                    <div>
+                        <p id="whatContains" style="color: #01BD22"></p><p id="contains" style="display:none; color:#FE4C4C">is part of username</p>
+                    </div>
                     <div id="suggested">Suggested: <span id="pSuggestTyped" style="font-size: 12px"></span><span id="pSuggestNew" style="font-size: 12px"></div>
                     <p id="passDup" style="display:none; color:red">Password: Contains part of Username</p>
                 </div>
@@ -80,13 +84,11 @@
                 console.log("same");
             }else if(!submitEnableUser){
                 console.log("username not matching");
-            }else if(!submitEnableUserDupPass){
+            }else if($("#whatContains").html()==""){
                 console.log("Password and username has dupliacted");
-                
-            }
-            else{
+            }else{
                 console.log("%" + submitEnable);
-
+                
                 $("#signUpForm").trigger("reset");
                 alert("Submission Form Successful!");
                 // $('input[name="submitB"]').prop("type", "submit");
@@ -177,6 +179,19 @@
                             $("#username1").show();
                         }
                     }
+                    var pass = $("#pswd").val();
+                    var usr = $("#usrId").val();
+                    console.log(typeof pass + " - " + pass + " : " + usr + " - " + typeof usr);
+                    if (usr != "" && pass.includes(usr)) {
+                        console.log("Found the dup");
+                        $("#contains").show();
+                        $("#whatContains").html(usr);
+                    }
+                    else {
+                        $("#contains").hide();
+                        $("#whatContains").html("");
+
+                    }
                 },
                 error: function(err) {
                     console.log(arguments);
@@ -204,8 +219,21 @@
                     charCount += 1;
                 }
             }
-            $("#pSuggestTyped").html($("#pswd").val()).css('color', 'blue');
+            $("#pSuggestTyped").html($("#pswd").val()).css('color', '#6394C6');
             $("#pSuggestNew").html(randomstring);
+            var pass = $("#pswd").val();
+            var usr = $("#usrId").val();
+            console.log( typeof pass+" - "+ pass + " : "+usr +" - "+ typeof usr);
+            if(usr!="" && pass.includes(usr)){
+                console.log("Found the dup");
+                $("#contains").show();
+                $("#whatContains").html(usr);
+            }else {
+                $("#contains").hide();
+                $("#whatContains").html("");
+
+            }
+          
         });
         $("#passw1").on('input', function() {
             if($("#pswd").val() != $("#pswd1").val()){
