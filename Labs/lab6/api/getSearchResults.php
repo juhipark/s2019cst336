@@ -12,8 +12,8 @@
     
     //checks whether user has typed something in the "Product" text box
     if(!empty($_GET['product'])){
-        $sql .= " AND productName LIKE :productName";
-        $sql .= " OR productDescription LIKE :productName";
+        $sql .= " AND (productName LIKE :productName";
+        $sql .= " OR productDescription LIKE :productName)";
         $namedParameters[":productName"] = "%" . $_GET['product'] . "%";
     }
 
