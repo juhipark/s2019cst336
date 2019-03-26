@@ -5,15 +5,18 @@
     
     // $sql = "SELECT * FROM om_product WHERE 1 And productName Like '%".$_GET['product']."%'";
     
-    //
     $namedParameters = array();
-    $sql = "SELECT * FROM om_product WHERE 1";
+    $sql = "SELECT * 
+            FROM om_product 
+            WHERE 1";
     
     //checks whether user has typed something in the "Product" text box
     if(!empty($_GET['product'])){
         $sql .= " AND productName LIKE :productName";
+        $sql .= " OR productDescription LIKE :productName";
         $namedParameters[":productName"] = "%" . $_GET['product'] . "%";
     }
+
     
     //checks whether user has selected a category of product
     if(!empty($_GET['category'])){
