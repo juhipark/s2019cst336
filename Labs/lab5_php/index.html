@@ -40,7 +40,8 @@
             <div id="passWord">
                 <div id="passw"><label>Password: </label><input id="pswd" type="password">
                     <div>
-                        <p id="whatContains" style="color: #01BD22"></p><p id="contains" style="display:none; color:#FE4C4C">is part of username</p>
+                        <p id="whatContains" style="color: #01BD22"></p>
+                        <p id="contains" style="display:none; color:#FE4C4C">is part of username</p>
                     </div>
                     <div id="suggested">Suggested: <span id="pSuggestTyped" style="font-size: 12px"></span><span id="pSuggestNew" style="font-size: 12px"></div>
                     <p id="passDup" style="display:none; color:red">Password: Contains part of Username</p>
@@ -58,23 +59,6 @@
         var submitEnableUserDupPass = false;
         $("#button").on("click", function() {
             //push the new userID input php session
-            $.ajax({
-                type: "post",
-                url: "/Labs/lab5_php/userPwd.php",
-                dataType: "json",
-                data: {
-                    "userID": $("#usrId").val(),
-                    "passWord1": $("#pswd").val(),
-                    "passWord2": $("#pswd1").val()
-                },
-                success: function(data) {
-                    console.log(data);
-                    console.log("Post was success");
-                },
-                error: function(err) {
-                    console.log(err);
-                }
-            });
 
             //check if the username provided is not part of the password
             var password = $("#pswd").val();
@@ -88,12 +72,28 @@
                 console.log("Password and username has dupliacted");
             }else{
                 console.log("%" + submitEnableUser);
-                
+                 $.ajax({
+                     type: "post",
+                     url: "/Labs/lab5_php/userPwd.php",
+                     dataType: "json",
+                     data: {
+                         "userID": $("#usrId").val(),
+                         "passWord1": $("#pswd").val(),
+                         "passWord2": $("#pswd1").val()
+                     },
+                     success: function(data) {
+                        console.log(data);
+                        console.log("Post was success");
+                     },
+                     error: function(err) {
+                         console.log(err);
+                     }
+                 });
                 $("#signUpForm").trigger("reset");
-                alert("Submission Form Successful!");
-                // $('input[name="submitB"]').prop("type", "submit");
-                window.scrollTo(0, 0);
-                // location.reload();
+                        alert("Submission Form Successful!");
+                        // $('input[name="submitB"]').prop("type", "submit");
+                        window.scrollTo(0, 0);
+                        // location.reload();                
             }
         });
         $("#zip1").on('change', function(e) {
