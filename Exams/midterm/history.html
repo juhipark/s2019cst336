@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title> History @ Cinder </title>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+</head>
+
+<body class="text-center">
+    <nav>
+        <a href="match.html">Match </a>|
+        <a class="active" href="history.html"> History</a>
+    </nav>
+    <header>
+        <h1> History </h1>
+    </header>
+
+    <br /><br />
+    <div id="content">
+        <table class="table" id="tableId">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">When</th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="myModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-content">
+            <div id="popupId">Some text in the Modal..</div>
+            <span class="close" aria-hidden="true" data-dismiss="modal" style="border-style: solid; width: 90px; margin: auto">Done</span>
+        </div>
+    </div>
+    
+    <script>
+    
+        var currentUsrId = 1;
+
+        $(document).ready(function() {
+            $("#modalPopup").modal("hide"); 
+
+            $.ajax({
+                type: "GET",
+                url: "api/getMatchHistory.php",
+                dataType: "json",
+                data: {
+                    'user_id': currentUsrId,
+                },
+                success: function(data, status) {
+                    //get all the user for whom tere is no match yet associated
+                    console.log(data);
+                    var currentTime = new Date().getTime();
+                    console.log(currentTime);
+                    var strWhen = "";
+                    var btnIndex = 0;
+                    data.forEach(function(key) {
+                        var relateiveTime = Date.parse(key['answer_timestamp']);
+                        console.log(relateiveTime);
+                        var hours = Math.abs(currentTime - relateiveTime) / 36e5;
+                        console.log("Hours difference: ", hours);
+
+                        if (hours < 1) {
+                            strWhen = "just now";
+                        }
+                        else if (hours >= 1 && hours < 2) {
+                            strWhen = "An hour ago";
+                        }
+                        else if (hours >= 2 && hours < 3) {
+                            strWhen = "2 hours ago";
+                        }
+                        else if (hours >= 3 && hours < 4) {
+                            strWhen = "3 hours ago";
+                        }
+                        else if (hours >= 4 && hours < 24) {
+                            strWhen = "more than 3 hours ago";
+                        }
+                        else if (hours >= 24 && hours < 48) {
+                            strWhen = "A day ago";
+                        }
+                        else if (hours >= 48 && hours < 72) {
+                            strWhen = "2 days ago";
+                        }
+                        else if (hours >= 72 && hours < 96) {
+                            strWhen = "3 days ago";
+                        }
+                        else {
+                            strWhen = "a long time ago";
+                        }
+                        $("#tableId tr:last").after(` <tr>
+                                                        <th scope="row"><img src='' width='50' width='50'></th>
+                                                        <td id="matchedUserId">${key['user_id']}</td>
+                                                        <td><img src='img/${key['answer_type_id']}.png' width='50' width='50'</td>
+                                                        <td>${strWhen}</td>
+                                                        <td><button class="detailsLink" id='${btnIndex}'>Details</td>
+
+                                                    </tr>`);
+                        btnIndex += 1;
+                    });//for each
+                    
+                    $("button.detailsLink").on('click', function(e) { 
+                         console.log("button clicked", e); 
+                         $("#myModal").modal("show"); 
+                         $("#popupId").html(`<p>About @</p>`); 
+                         
+                    }); //Display Bootstrap Modal Event
+                    
+                },
+                complete: function(data, status) {}
+            }); //ajax to get all potentail matches
+            
+        }); // document ready event
+    </script>
+    
+    
+</body>
+
+</html>

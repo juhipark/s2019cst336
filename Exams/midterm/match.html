@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title> Match @ Cinder </title>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+</head>
+
+<body class="text-center">
+    <nav>
+        <a class="active" href="match.html">Match </a>|
+        <a href="history.html"> History</a>
+    </nav>
+    <header>
+        <h1> Match </h1>
+    </header>
+    <br /><br />
+    <div id="content" class="d-flex justify-content-between">
+        <div id="usrImgId" class="p-2"></div>
+        <div id="usrAboutId" class="p-2"></div>
+    </div>
+    <br>
+    <div id="buttonsId">
+        <button id="dislikeBtn" name="buttons">Dislike</button>
+        <button id="questionBtn" name="buttons">?</button>
+        <button id="likeBtn" name="buttons">Like</button>
+
+    </div>
+
+
+    <script>
+        var userId = 1;
+
+        $(document).ready(function() {
+
+            $.ajax({
+                type: "GET",
+                url: "api/getUser.php",
+                dataType: "json",
+                data: {},
+                success: function(data, status) {
+                    //get all the user for whom tere is no match yet associated
+                    console.log(data[userId]);
+                    //Assume user with id of 1
+                    $("#usrImgId").html(`<img src="${data[userId]['picture_url']}" height="400" width="300">`);
+
+                    $("#usrAboutId").html(`<h3>About @${data[userId]['username']}</h3>`+
+                                       `<p>${data[userId]['about_me']}</p>`);
+
+                },
+                complete: function(data, status) {
+
+                }
+            });
+
+            $("[name=buttons]").on("click", function() {
+                console.log("Button is clicked next user");
+                if(userId == 20){
+                    //back to the first user
+                    userId = 1;
+                }else{
+                    //next user id
+                    userId+= 1;
+                }
+                
+                $.ajax({
+                    type: "GET",
+                    url: "api/getUser.php",
+                    dataType: "json",
+                    data: {
+                        "id": userId,
+                    },
+                    success: function(data, status) {
+                        //get all the user for whom tere is no match yet associated
+                        data = data[0];
+
+                        //Assume user with id of 1
+                        $("#usrImgId").html(`<img src="${data['picture_url']}" height="400" width="300">`);
+
+                        $("#usrAboutId").html(`<h3>About @${data['username']}</h3>`+
+                                       `<p>${data['about_me']}</p>`);
+
+                    },
+                    complete: function(data, status) {
+
+                    }
+                });//ajax call to get next user
+            }); //on click of any buttons
+
+
+        }); // document ready event
+    </script>
+    
+    <table>
+        <thead>
+        <tr>
+        <th style="text-align:left">#</th>
+        <th style="text-align:left">Task Description</th>
+        <th style="text-align:left">Points</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr style="color: green;">
+        <td style="text-align:left">1</td>
+        <td style="text-align:left">Active potential matches are pulled from MySQL using AJAX and a PHP API endpoint, and provides unmatched users, and is displayed using the specified page design</td>
+        <td style="text-align:left">40</td>
+        </tr>
+        <tr style="color: green;">
+        <td style="text-align:left">2</td>
+        <td style="text-align:left">The match history is pulled from MySQL using AJAX and a PHP API endpoint, and provides the data for all matches, whether or not there is history, and is displayed using the specified page design</td>
+        <td style="text-align:left">40</td>
+        </tr>
+        <tr style="color: orange;">
+        <td style="text-align:left">3</td>
+        <td style="text-align:left">The information modal is popped up with the "About Me" information for the match</td>
+        <td style="text-align:left">20</td>
+        </tr>
+        <tr>
+        <td style="text-align:left"></td>
+        <td style="text-align:left">TOTAL</td>
+        <td style="text-align:left">100</td>
+        </tr>
+        <tr style="color: green;">
+        <td style="text-align:left"></td>
+        <td style="text-align:left">This rubric is properly included AND UPDATED (BONUS)</td>
+        <td style="text-align:left">2</td>
+        </tr>
+        <tr style="color: orange;">
+        <td style="text-align:left">BD</td>
+        <td style="text-align:left">A separate report that shows the number of matches by category is available from navigation and shows the correct numbers, and is cleanly formatted</td>
+        <td style="text-align:left">15</td>
+        </tr>
+        <tr style="color: orange;">
+        <td style="text-align:left">BD</td>
+        <td style="text-align:left">After all potential matches have been displayed, the buttons are disabled and a message is displayed; once the message has been closed the user is navigated to the history page</td>
+        <td style="text-align:left">15</td>
+        </tr>
+        <tr style="color: green;">
+        <td style="text-align:left">BD</td>
+        <td style="text-align:left">The relative time is displayed in the history page instead of actual date and time</td>
+        <td style="text-align:left">10</td>
+        </tr>
+        <tr style="color: orange;">
+        <td style="text-align:left">BD</td>
+        <td style="text-align:left">Users who liked the current user are pulled from MySQL using AJAX and a PHP API endpoint, and are displayed using the specified page design</td>
+        <td style="text-align:left">15</td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

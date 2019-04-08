@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Hangman</title>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script>
+        /*global $*/
+        var str = "";
+        var wrongCounter = 0;
+
+
+        function getWord() {
+
+            //Ajax call to get the word_id and its length from the database 
+            $.ajax({
+                type: "GET",
+                url: "api/get_word_api.php",
+                dataType: "json",
+                data: {},
+                success: function(data, status) {
+                    console.log(data);
+                    for (var i = 0; i < data["length"]; i++) {
+
+                        str += " _";
+                    }
+                    //actual letter will be in the index+1 spot;
+                    $("#dashes").text(str);
+                    $("#wordId").val(data.word_id);
+
+                },
+                complete: function(data, status) {
+                    //alert(status);
+                }
+
+            }); //ajax
+        }
+
+        function replaceAtLetterByIndex(str, index, replacement) {
+            return str.substr(0, index * 2 + 1) + replacement + str.substr(index * 2 + 1 + replacement.length);
+        }
+
+        $(document).ready(function() {
+
+
+            //getWord Function gets the random word from the database.    
+            getWord();
+
+            //Ajax call to check the letter in the selected word  
+            $("#submit").click(function() {
+
+                $.ajax({
+                    type: "get",
+                    url: "api/check_word.php",
+                    data: {
+                        "checkWordID": $("#wordId").val(),
+                        "checkLetter": $("#letter").val()
+                    },
+                    success: function(data, status) {
+                        console.log("*", data);
+                        var values = $.parseJSON(data);
+
+                        console.log(values.bool);
+                        console.log(values.index);
+                        
+                        if (values.bool) {
+                            var index = values.index;
+                            console.log(str);
+                            // str.charAt(index+1) = $("#letter").val();
+                            //actual letter will be in the index+1 spot;
+
+                            str = replaceAtLetterByIndex(str, index, $("#letter").val());
+                            console.log(str);
+
+                            $("#dashes").text(str);
+                        }else{
+                            if(wrongCounter<(str.length/2)){
+                                wrongCounter ++;
+                                $("#hangImg").attr("src","img/stick_"+wrongCounter+".png");
+                            }else{
+                                
+                                
+                            }
+                        }
+                    },
+                    complete: function(data, status) { //optional, used for debugging purposes
+                        //alert(status);
+                    }
+                }); //AJAX  
+            }); //username changes
+
+
+
+
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <h1>Hangman</h1>
+    <button id="newWord" onclick="getWord()">New Word</button>
+    </br>
+
+    <h4 id="insert"> Insert a Letter:
+        <input type="text" onkeyup="this.value = this.value.toLowerCase();" id="letter" name="Letter" maxlength="1" />
+        <button id="submit">Submit</button></h4>
+    <br/>
+    <div>
+        <p id="dashes" style="font-size:85px">.
+    </div>
+    <br/>
+
+    <input type="hidden" id="wordId">
+    <h4 id="resultMsg" style="{color:red}"></h4>
+    <div id="man">
+        <img src="img/stick_0.png" class="manImg" id="hangImg">
+    </div>
+
+</body>
+
+</html>

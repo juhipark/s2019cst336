@@ -4,8 +4,10 @@
     <title>Shopping Cart</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-
+    <!--<link rel="stylesheet" type="text/css" href="css/styles.css">-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 </head>
 
 <body>
@@ -20,10 +22,11 @@
             <th>Total</th>
         </tr>
         <tr>
-            <td id="itemName"></td>
+            <td id="itemName">
+            </td>
             <td id="itemPrice"></td>
             <td><input type="text" id="itemQty" size="5"></td>
-            <td id="totalPrice"></td>
+            <td id="itemTotal"></td>
         </tr>
         <tr>
             <td id="itemNameMenu">
@@ -32,7 +35,7 @@
                 </select> </td>
             <td id="itemPrice2"></td>
             <td><input type="text" id="itemQty2" size="5"></td>
-            <td></td>
+            <td id="itemTotal2"></td>
         </tr>
         <tr>
             <td>Discount</td>
@@ -65,47 +68,147 @@
     </table>
 
     <div id="promoCode">Promo Code: <input type="text" id="disCode" size="15"></div>
+    <div id="promoExpire"></div>
 
-
+    <div class="modal" id="productModal" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Product History</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <div id="popup"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        var priceRandom = 0;
-        var priceDropdown = 0;
-        var totalT = 0;
+        var priceRandomItem = 0;
+        var priceDropdownItem = 0;
+        var subTotal = 0;
         var tax = 0;
-        var allTotal = 0;
+        var total = 0;
+        var discount = 0;
+        var discountedSubTotal = 0;
+
+        //update prices & transaction
+        function updateTotalPrice(itemTotal, itemQty, priceItem) {
+            $(itemTotal).text("$" + ($(itemQty).val() * priceItem).toFixed(2));
+
+            //update subtotal
+            subTotal = Number($("#itemTotal").text().substr(1)) + Number($("#itemTotal2").text().substr(1));
+            subTotal.toFixed(2);
+            $("#subtotal").text("$" + subTotal);
+
+            //update tax is subtotal X tax percentage
+            tax = Number((subTotal * 0.1).toFixed(2));
+            $("#tax").text("$" + tax);
+
+            //update total for the transaction
+            total = Number((subTotal + tax).toFixed(2));
+            $("#total").text("$" + total);
+        }
+
+        function checkDiscount(discountTemp) {
+            if (discountTemp != 0) {
+                //apply discount
+                var discountedSubTotal = 0;
+                var discountedTax = 0;
+                var discountedTotal = 0;
+
+                //find out how much discounted price from subtotal
+                $("#discount").text("$" + (subTotal * discountTemp).toFixed(2));
+
+                //update discounted subtotal
+                discountedSubTotal = Number((subTotal - (subTotal * discountTemp)).toFixed(2));
+                $("#subtotal").text("$" + discountedSubTotal);
+
+                discountedTax = Number((discountedSubTotal * 0.1).toFixed(2));
+                $("#tax").text("$" + discountedTax);
+
+                //update total for the transaction
+                discountedTotal = Number((discountedSubTotal + discountedTax).toFixed(2));
+                $("#total").text("$" + discountedTotal);
+            }
+            else {
+
+
+            }
+
+        }
+
+
         $(document).ready(function() {
             $.ajax({
                 type: "get",
-                url: "./index.php",
+                url: "api/getProduct.php",
                 dataType: "json",
                 data: {
 
                 },
                 success: function(data, status) {
-
-                    var data = arguments[0];
                     console.log(data);
+                    var randInt = Math.floor((Math.random() * 18) + 1); // 0~17
 
-                    var randInt = Math.floor((Math.random() * 18) + 1); // 1~18
-                    console.log(data[randInt]["productName"]);
-                    $("#itemName").html(data[randInt]["productName"]);
+                    var index = 0;
+                    // $("#results").append("<a href='#' class='historyLink' id='" + key['productId'] + "'>History</a> "); //Create the link to open modal
+                    //create a link to popup
+                    var linkableItem = document.createElement("a");
+                    linkableItem.setAttribute("href", "#");
+                    linkableItem.setAttribute("class", "productPopupLink");
+                    linkableItem.innerHTML = data[randInt]["productName"];
+                    linkableItem.setAttribute("data-index", index);
+                    linkableItem.setAttribute("id", "productPopupId");
 
-                    price = data[randInt]["productPrice"];
-                    //var q = data["qty"];
+                    // $("#itemName").append("<a href='' class='productPopupLink'>" + data[randInt]["productName"] + "</a>");
+                    $("#itemName").append(linkableItem);
 
-                    $("#itemPrice").html("$" + price);
+                    console.log($("#itemName").html());
+                    $('a.productPopupLink').on('click', function() {
+                    // $("#productPopupId").on('click', function(e) {
+                        // e.preventDefault();
+                        console.log("Link clikced!");
+                        var index = $(this).data("index");
 
-                    // console.log($("#itemQty").val());
-                    // totalT = q * priceRandom;
-                    // $("#totalPrice").html("$" + totalT);
+                        $("#productModal").modal("show");
+                        console.log("error1");
+                        $.ajax({
+                            type: "GET",
+                            url: "api/getProduct.php",
+                            dataType: "json",
+                            data: {
+                                "productName": $("#productPopupId").text()
+                            },
+                            success: function(data, status) {
+                                console.log(data);
+                                if (data.length != 0) {
+                                    $("#popup").html("");
+                                    $("#popup").append(data[0]['productName'] + "<br />");
+                                    $("#popup").append("<img src='" + data[0]['productImage'] + "' width='200' /> <br />");
+                                    $("#popup").append(data[0]['productDescription'] + "<br />");
 
-                    // $("#subtotal").html("$" + totalT);
-                    // tax = Math.floor(totalT * .10);
+                                }
+                                else {
+                                    $("#popup").html("No description history for this item.");
+                                }
+                            }
+                        });
+                    }); //Display Bootstrap Modal Event                    });
+                    //update the price for the item
+                    priceRandomItem = data[randInt]["productPrice"];
+                    $("#itemPrice").html("$" + priceRandomItem);
 
-                    // $("#tax").html("$" + tax);
-                    // allTotal = tax + totalT;
-                    // $("#total").html("$" + allTotal);
+                    //initial quantity is zero
+                    $("#itemQty").val(1);
+
+                    updateTotalPrice("#itemTotal", "#itemQty", priceRandomItem);
 
                     for (var i = 0; i < data.length; i++) {
                         var o = new Option(data[i]["productName"], i + 1);
@@ -119,114 +222,104 @@
                 }
             });
 
-        });
+            $("#productMenu").on('change', function(e) {
+                console.log(this.value);
+                var productTempName = $("#productMenu option:selected").text();
 
-        $("#productMenu").on('change', function(e) {
-            console.log(this.value);
-            var productTempName = $("#productMenu option:selected").text();
-            console.log("Selected Product Name --->  ", productTempName);
-            var productTempVal = $("#productMenu option:selected").val();
-            if (productTempVal == 0) {
-                console.log("Can't get a price of 0");
-                $("#itemQty2").val('');
-            }
-            else {
-                //Upate the price for the product selected from dropdown menu
-                console.log($("#productMenu option:selected").text());
-                var str = $("#productMenu option:selected").text();
-                var mySubString = str.substring(
-                    str.lastIndexOf("(") + 1,
-                    str.lastIndexOf(")")
-                );
-                $("#itemQty2").val(0);
-                $("#itemPrice2").html(mySubString);
-            }
+                var productTempVal = $("#productMenu option:selected").val();
+                if (productTempVal == 0) {
+                    console.log("Can't get a price of 0");
+                    $("#itemQty2").val('');
+                }
+                else {
+                    //Upate the price for the product selected from dropdown menu
+                    console.log($("#productMenu option:selected").text());
+                    var str = $("#productMenu option:selected").text();
+                    var mySubString = str.substring(
+                        str.lastIndexOf("(") + 1,
+                        str.lastIndexOf(")")
+                    );
 
+                    //update the price for the item
+                    priceDropdownItem = Number(mySubString.substring(1));
 
-        });
+                    $("#itemPrice2").html("$" + priceDropdownItem);
 
-        $("#itemQty").on('input', function(e) {
+                    //update total of dropdown product
+                    $("#itemQty2").val(1);
 
-            totalT = $("#itemQty").val() * price;
+                    updateTotalPrice("#itemTotal2", "#itemQty2", priceDropdownItem);
 
-            $("#totalPrice").html("$" + totalT);
+                    //check discount
+                    checkDiscount(discount);
+                }
 
-            $("#subtotal").html("$" + totalT);
+            });
 
-            if ($("#disCode").val() != "") {
+            $("#itemQty").on('input', function(e) {
 
-                var discountedP = Math.floor(totalT * discount);
+                updateTotalPrice("#itemTotal", "#itemQty", priceRandomItem);
 
-                $("#discount").html(discountedP);
+                //check discount
+                checkDiscount(discount);
+            }); // item quantity changed
 
-                $("#subtotal").html("$" + (totalT - discountedP));
+            $("#itemQty2").on('input', function(e) {
 
-                var ntotalT = totalT - discountedP;
+                updateTotalPrice("#itemTotal2", "#itemQty2", priceDropdownItem);
 
-                tax = Math.floor(ntotalT * .10);
+                //check discount
+                checkDiscount(discount);
+            }); // item quantity2 changed
 
-                $("#tax").html("$" + tax);
+            $("#disCode").on("input", function(e) {
+                console.log($("#disCode").val());
 
-                allTotal = ntotalT + tax;
+                $.ajax({
+                    type: "GET",
+                    url: "api/getPromo.php",
+                    dataType: "json",
+                    data: {
+                        "promo": $("#disCode").val()
+                    },
+                    success: function(data, status) {
+                        if ($.trim(data)) {
+                            console.log(data[0]);
+                            $("#promoExpire").html(`<p style="color:red">This Promo Code expires on ${data[0]["expirationDate"]}</p>`);
 
-                $("#total").html("$" + allTotal);
-            }
-            else {
-                tax = Math.floor(totalT * .10);
+                            //update discount rate to price
+                            discount = data[0]["discount"] / 100;
+                            console.log(discount);
+                            $("#discountPerct").text(`${data[0]["discount"]}%`);
 
-                $("#tax").html("$" + tax);
+                        }
+                        else {
+                            $("#promoExpire").html(`<p>Can't find following: <b>${$("#disCode").val()}</b></p>`);
+                            discount = 0;
+                            $("#discountPerct").text("");
+                            $("#discount").text("");
 
-                allTotal = tax + totalT;
+                            //reset total & subtotal
+                            $("#subtotal").text("$" + subTotal);
 
-                $("#total").html("$" + allTotal);
-            }
-            // subtotal= totalS+totalSan+totalT;
-            // tax= subtotal*.10;
-            // total= tax+subtotal+shipping;
+                            discountedTax = Number((subTotal * 0.1).toFixed(2));
+                            $("#tax").text("$" + tax);
 
-            // $("#subtotal").html("$"+subtotal);
-            //  $("#tax").html("$"+tax);
-            // $("#total").html("$"+total);
+                            //update total for the transaction
+                            total = Number((subTotal + tax).toFixed(2));
+                            $("#total").text("$" + total);
+                        }
 
-        });
-        // var totalSan = 0;
-        // var totalS = 0;
-        // var subtotal = 0;
-        // var tax = 0;
-        // var total = 0;
-        // var shipping = 0;
-        var discount = 0;
-        $("#disCode").on("input", function(e) {
-            $.ajax({
-                type: "get",
-                url: "./api/applyPromoCode.php",
-                dataType: "json",
-                data: {
-                    "code": $("#disCode").val()
-                },
-                success: function(data, status) {
-                    console.log(data);
+                        checkDiscount(discount);
 
-                    discount = data;
-                    if (discount != 0) {
-                        $("#discountPerct").html(discount * 100 + "%");
-
-                        var discountedP = Math.floor(totalT * discount);
-                        $("#discount").html(discountedP);
-                        $("#subtotal").html("$" + (totalT - discountedP));
-                        var ntotalT = totalT - discountedP;
-                        tax = Math.floor(ntotalT * .10);
-                        $("#tax").html("$" + tax);
-                        allTotal = ntotalT + tax;
-                        $("#total").html("$" + allTotal);
+                    },
+                    complete: function(data, status) {
 
                     }
-                },
-                complete: function(data, status) { //optional, used for debugging purposes
-                    //console.log(status);
-                }
-            });
-        });
+                });
+            }); //discount promo code input
+
+        }); //document ready
     </script>
 </body>
 

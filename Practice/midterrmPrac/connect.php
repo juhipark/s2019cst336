@@ -1,12 +1,12 @@
 <?php
     function getDBConnection(){
-        $host = "localhost";
-        $dbName = "midterm1";
-        $user = "irismanriquezc";
-        $pass = "";
-        $dsn = "mysql:host=$host;dbname=$dbName";
         
-       
+        $host = "localhost";
+        $dbname = "midtermprac";
+        $username = "root";
+        $password = "";
+        
+        $dsn = "mysql:host=$host;dbname=$dbname";
        
        $opt =[
            PDO::ATTR_ERRMODE=> PDO::ERRMODE_EXCEPTION,
@@ -14,9 +14,18 @@
            PDO::ATTR_EMULATE_PREPARES => false,
            ];
            
-          $pdo = new PDO($dsn,$user,$pass, $opt);
+          $pdo = new PDO($dsn,$username,$password,$opt);
           
           return $pdo;
+          
+        // //creates db connection
+        // $dbConn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+        
+        // //display errors when accessing tables
+        // $dbConn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        // return $dbConn;
+          
     }
     
 // getDBConnection(); //Gives you the error message
