@@ -54,3 +54,18 @@
 [11-Mar-2019 08:38:57 UTC] PHP Stack trace:
 [11-Mar-2019 08:38:57 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:0
 [11-Mar-2019 08:38:57 UTC] PHP   2. json_encode() /home/ubuntu/workspace/Labs/lab5_php/userPwd.php:54
+[15-Apr-2019 22:03:49 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'jahenderson'@'localhost' (using password: NO)' in /home/ubuntu/workspace/Labs/lab7/login.php:34
+Stack trace:
+#0 /home/ubuntu/workspace/Labs/lab7/login.php(34): PDO->__construct('mysql:host=127....', 'jahenderson', '')
+#1 {main}
+  thrown in /home/ubuntu/workspace/Labs/lab7/login.php on line 34
+[15-Apr-2019 22:03:50 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'jahenderson'@'localhost' (using password: NO)' in /home/ubuntu/workspace/Labs/lab7/login.php:34
+Stack trace:
+#0 /home/ubuntu/workspace/Labs/lab7/login.php(34): PDO->__construct('mysql:host=127....', 'jahenderson', '')
+#1 {main}
+  thrown in /home/ubuntu/workspace/Labs/lab7/login.php on line 34
+[15-Apr-2019 22:04:10 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'jahenderson'@'localhost' (using password: NO)' in /home/ubuntu/workspace/Labs/lab7/login.php:34
+Stack trace:
+#0 /home/ubuntu/workspace/Labs/lab7/login.php(34): PDO->__construct('mysql:host=127....', 'jahenderson', '')
+#1 {main}
+  thrown in /home/ubuntu/workspace/Labs/lab7/login.php on line 34
