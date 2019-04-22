@@ -1,0 +1,17 @@
+body {
+    background-color: #daa4ea;
+}
+#container{
+        background-color: #daa4ea;
+
+}
+h1{
+    font-size: 8ex;
+    font-family: 'Playfair Display', serif;
+    text-align:center;
+    animation-duration: 3s;
+    animation-delay: 2s;
+    animation-iteration-count: 2;
+
+
+}

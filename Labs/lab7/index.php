@@ -1,3 +1,11 @@
+<?php
+    session_start();
+
+    if (!isset($_SESSION['email'])){
+      header("Location: login.html");
+    }
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -74,6 +82,13 @@
                         }
                      });
                  }); //Display Bootstrap Modal Event
+                 
+                 
+                 $("#logoutBtn").on('click', function(){
+                     console.log("Redirect to logout page");
+                     window.location = "logout.php";
+                     
+                 });//Logout Button Click Event
 
             }); //Document ready Event
             
@@ -82,7 +97,7 @@
     <body>
         <div class="searchField">
             <h1> OtterMart Product Search </h1>
-            
+        
             <form>
                 Product: <input type="text" name="product" />
                 <br>
@@ -100,6 +115,7 @@
             </form>
             <br>
             <button id="searchForm">Search</button>
+            <button class="btn btn-danger" id="logoutBtn">Logout</button>
             <br />
         
         </div>

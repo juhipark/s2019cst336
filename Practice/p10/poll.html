@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> CSUMB Poll </title>
+    <meta charset="utf-8" />
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+</head>
+
+<body>
+
+    <h1 class="animated jello delay-2s"> Is CSUMB the best campus in California? </h1>
+    <input type="radio" name="q1" value="option1" /><label style="font-family: 'Cinzel', serif; font-size: 22px; ">Strongly Disagree</label>
+    <input type="radio" name="q1" value="option2" /><label style="font-family: 'Cinzel', serif; font-size: 22px;">Disagree</label>
+    <input type="radio" name="q1" value="option3" /><label style="font-family: 'Cinzel', serif; font-size: 22px;">Neutral</label>
+    <input type="radio" name="q1" value="option4" /><label style="font-family: 'Cinzel', serif; font-size: 22px;">Agree</label>
+    <input type="radio" name="q1" value="option5" /><label style="font-family: 'Cinzel', serif; font-size: 22px;">Strongly Agree</label>
+    <button id="q1">Submit</button>
+
+    <!--placeholder to display here chart-->
+    <div id="container"></div>
+
+    <!-- scripts -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+    <script>
+        //Here is an example call to display the chart
+        //You may need to parse to int if using strings
+
+        $(document).ready(function() { // Code to be executed alert("Document is ready"); 
+            $.ajax({
+                type: "post",
+                url: "api/poll_result.php",
+                data: {},
+                success: function(data){
+                    //check if session was update
+                    console.log("Document on ready");
+
+                    console.log("**", data);
+                    
+                    if (data == "true"){
+                        
+                        //hide radio button
+                        $("input[name='q1']").hide();
+                    }
+                }
+            });
+
+
+            $("#q1").on('click', function() {
+                
+                
+                // console.log("Submit button clicked");
+                // console.log($('input[name="q1"]:checked'));
+                console.log(document.getElementsByName("q1"));
+    
+                var question1 = document.getElementsByName('q1');
+                var q1Value = -1;
+                
+                for (var i = 0; i < question1.length; i++) {
+                    if (question1[i].checked == true) {
+                        q1Value = i;
+                    }
+                }
+                
+                $.ajax({
+                    type: "get",
+                    url: "api/poll_result.php",
+                    dataType: "json",
+                    data: {
+                        'checkedIdx': q1Value,
+                        'checked': $("input[name='q1']:checked").val()
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        console.log("Strongly Disagree value: -> ", data[0]['option1']);
+                        
+                        // displayPollChart(0, 10, 20, 30, 40);
+                        // displayPollChart(parseInt("data[0]['option1']"), parseInt("data[0]['option2']"), parseInt("data[0]['option3']"), parseInt("data[0]['option4']"), parseInt("data[0]['option5']"));
+
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    },
+                    complete: function(data, status) {
+                        console.log(status);
+                    },
+                }); // ajax call on DB to get poll table
+
+            }); //on submit button
+
+        }); //on ready
+
+
+        //******
+        // Displays poll chart. For more info about charts visit https://www.highcharts.com/demo
+        // Parameters:
+        // option1 to option5 must be integers, represent the total users who selected each option
+        //*******
+        function displayPollChart(option1, option2, option3, option4, option5) {
+            Highcharts.chart('container', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: ''
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    name: 'q1s',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'Strongly Disagree',
+                        y: option1,
+                        sliced: true,
+                        selected: true
+                    }, {
+                        name: 'Disagree',
+                        y: option2,
+                    }, {
+                        name: 'Neutral',
+                        y: option3
+                    }, {
+                        name: 'Agree',
+                        y: option4
+                    }, {
+                        name: 'Strongly Agree',
+                        y: option5
+                    }, ]
+                }]
+            });
+        } //endFunction
+    </script>
+</body>
+
+</html>

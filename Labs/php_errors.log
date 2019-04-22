@@ -69,3 +69,26 @@ Stack trace:
 #0 /home/ubuntu/workspace/Labs/lab7/login.php(34): PDO->__construct('mysql:host=127....', 'jahenderson', '')
 #1 {main}
   thrown in /home/ubuntu/workspace/Labs/lab7/login.php on line 34
+[17-Apr-2019 22:18:33 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'jahenderson'@'localhost' (using password: NO)' in /home/ubuntu/workspace/Labs/lab7/login.php:34
+Stack trace:
+#0 /home/ubuntu/workspace/Labs/lab7/login.php(34): PDO->__construct('mysql:host=127....', 'jahenderson', '')
+#1 {main}
+  thrown in /home/ubuntu/workspace/Labs/lab7/login.php on line 34
+[17-Apr-2019 22:18:34 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'jahenderson'@'localhost' (using password: NO)' in /home/ubuntu/workspace/Labs/lab7/login.php:34
+Stack trace:
+#0 /home/ubuntu/workspace/Labs/lab7/login.php(34): PDO->__construct('mysql:host=127....', 'jahenderson', '')
+#1 {main}
+  thrown in /home/ubuntu/workspace/Labs/lab7/login.php on line 34
+[17-Apr-2019 22:27:32 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'jahenderson'@'localhost' (using password: NO)' in /home/ubuntu/workspace/Labs/lab7/login.php:34
+Stack trace:
+#0 /home/ubuntu/workspace/Labs/lab7/login.php(34): PDO->__construct('mysql:host=127....', 'jahenderson', '')
+#1 {main}
+  thrown in /home/ubuntu/workspace/Labs/lab7/login.php on line 34
+[17-Apr-2019 22:29:03 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000] [1045] Access denied for user 'jahenderson'@'localhost' (using password: NO)' in /home/ubuntu/workspace/Labs/lab7/login.php:34
+Stack trace:
+#0 /home/ubuntu/workspace/Labs/lab7/login.php(34): PDO->__construct('mysql:host=127....', 'jahenderson', '')
+#1 {main}
+  thrown in /home/ubuntu/workspace/Labs/lab7/login.php on line 34
+[17-Apr-2019 23:16:27 UTC] PHP Warning:  Division by zero in /home/ubuntu/workspace/Labs/lab7/logout.php on line 6
+[17-Apr-2019 23:16:27 UTC] PHP Stack trace:
+[17-Apr-2019 23:16:27 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab7/logout.php:0

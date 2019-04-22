@@ -25,28 +25,28 @@
       $jsonData = json_decode($rawJsonString, true);
 
       // TODO: do stuff to get the $results which is an associative array
-      $host = "127.0.0.1";
-      $dbname = "dashboard";
-      $username = "jahenderson";
+      $host = "localhost";
+      $dbname = "ottermart";
+      $username = "root";
       $password = "";
   
       // Get Data from DB
       $dbConn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
       $dbConn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
 
-      $sql = "SELECT * FROM user " .
-             "WHERE email = :email ";
+      $sql = "SELECT * FROM om_user_admin " .
+             "WHERE om_user_email = :om_user_email ";
       
       $stmt = $dbConn->prepare($sql);
-      $stmt->execute(array (":email" => $_POST['email']));
+      $stmt->execute(array (":om_user_email" => $_POST['email']));
       
       $record = $stmt->fetch();
       
-      $isAuthenticated = password_verify($_POST["password"], $record["password"]);
+      $isAuthenticated = password_verify($_POST["password"], $record["om_user_password"]);
         
       if ($isAuthenticated) {
-        $_SESSION["email"] = $record["email"];
-        $_SESSION["isAdmin"] = $record["is_admin"];
+        $_SESSION["email"] = $record["om_user_email"];
+        $_SESSION["isAdmin"] = $record["om_user_is_admin"];
       }
       
       // Allow any client to access

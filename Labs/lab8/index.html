@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lab8</title>
+
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!--Contributes to ag-Grid Table-->
+    <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
+    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-balham.css">
+
+    <!--Custom CSS Style-->
+    <style type="text/css">
+    </style>
+
+</head>
+
+<body>
+    <div id="content" class="mx-auto text-center" style="width: 50%; ">
+        <h1>Image Gallery Page</h1>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">Menu</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="favorite.php">View Favroites</a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
+        <div class="input-group mb-3">
+            <input type="text" id="keyword_search_id" onchange="keyword_searched()" class="form-control" placeholder="Search Keyword" aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <span class="input-group-text" id="i_search"><i class="fas fa-search" aria-hidden="true"></i></span>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card border-dark mb-3" style="max-width: 20rem;">
+                        <div class="card-header">Favorite <img id="item1" onclick="click_icon_function(this.id)" name="unclicked" src="img/favorite.png" style="width: 40px;" /></div>
+                        <div class="card-body">
+                            <h4 class="card-title">Dark card title</h4>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card border-dark mb-3" style="max-width: 20rem;">
+                        <div class="card-header">Favorite</div>
+                        <div class="card-body">
+                            <h4 class="card-title">Dark card title</h4>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card border-dark mb-3" style="max-width: 20rem;">
+                        <div class="card-header">Header</div>
+                        <div class="card-body">
+                            <h4 class="card-title">Dark card title</h4>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script type="text/javascript">
+        function keyword_searched(e) {
+            var keyword_str = document.getElementById("keyword_search_id").value;
+            console.log("Keyword searched: ", keyword_str);
+            $.ajax({
+                type: "GET",
+                url: "api/getImages.php",
+                dataType: "json",
+                data: {
+                    "searchKey": $("#keyword_search_id").val()
+                },
+                success: function(data, status) {
+                    console.log(data);
+
+                    for (var idx in data) {
+                        console.log(data[idx]);
+                        //create card --> <img id="item"+idx name="unclicked"
+
+                    }
+                }
+            }); //ajax call
+
+        }
+
+        function click_icon_function(itemID) {
+            if (document.getElementById(itemID).getAttribute("name") == "unclicked") {
+                console.log(itemID);
+                document.getElementById(itemID).setAttribute("src", "img/favorite-on.png");
+                document.getElementById(itemID).setAttribute("name", "clicked");
+                //update url link to db
+                $.ajax({
+                    type: "PUT",
+                    url: "api/getImages.php",
+                    dataType: "json",
+                    data: {
+                        "urlLink": $("#keyword_search_id").val()
+                    },
+                    success: function(data, status) {
+                        console.log(data);
+
+                        for (var idx in data) {
+                            console.log(data[idx]);
+                            //create card --> <img id="item"+idx name="unclicked"
+
+                        }
+                    }
+                });
+            }
+            else {
+                document.getElementById(itemID).setAttribute("src", "img/favorite.png");
+                document.getElementById(itemID).setAttribute("name", "unclicked");
+                //delte off of db
+                $.ajax({
+                    type: "DELETE",
+                    url: "api/getImages.php",
+                    dataType: "json",
+                    data: {
+                        "searchKey": $("#keyword_search_id").val()
+                    },
+                    success: function(data, status) {
+                        console.log(data);
+
+                        for (var idx in data) {
+                            console.log(data[idx]);
+                            //create card --> <img id="item"+idx name="unclicked"
+
+                        }
+                    }
+                });
+
+            }
+
+        }
+    </script>
+</body>
+
+</html>
