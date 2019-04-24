@@ -40,7 +40,7 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php">Home</a>
+                            <a class="nav-link" href="index.html">Home</a>
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="#">View Favroites <span class="sr-only">(current)</span></a>
@@ -64,40 +64,7 @@
             
         </div> 
 
-        <script>
-            
-            $(document).ready(function(){
-                    $.ajax({
-                        type: "GET",
-                        url: "api/getFavorites.php",
-                        dataType: "json",
-                        data:{
-                        },
-                        success: function(data, status){
-                            console.log(data);
-                            
-                            // create lists of all data 
-                            for (var idx in data) {
-                            
-                                console.log(data[idx]);
-                                
-                                // var 
-                                
-                                var rowElem = "<tr><th scope='row'>"+(data[idx]['img_favorites_id']) +
-                                            "</th><td>"+data[idx]['img_favorites_url']+"</td>"+
-                                            "<td>"+data[idx]['img_favorites_keyword']+"</td></tr>";
-                                            
-                                document.getElementById("tableBodyId").innerHTML += rowElem;
-                                
-                                
-                            }
-                            
-                            
-                        }
-                    }); //ajax call
-            });//on ready
-            
-        </script>
+        <script src="js/function_favorite.js" type="text/javascript"></script>
     
     </body>
 </html>

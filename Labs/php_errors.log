@@ -92,3 +92,27 @@ Stack trace:
 [17-Apr-2019 23:16:27 UTC] PHP Warning:  Division by zero in /home/ubuntu/workspace/Labs/lab7/logout.php on line 6
 [17-Apr-2019 23:16:27 UTC] PHP Stack trace:
 [17-Apr-2019 23:16:27 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab7/logout.php:0
+[23-Apr-2019 17:56:07 UTC] PHP Warning:  Division by zero in /home/ubuntu/workspace/Labs/lab7/logout.php on line 6
+[23-Apr-2019 17:56:07 UTC] PHP Stack trace:
+[23-Apr-2019 17:56:07 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab7/logout.php:0
+[23-Apr-2019 19:09:03 UTC] PHP Warning:  Division by zero in /home/ubuntu/workspace/Labs/lab7/logout.php on line 6
+[23-Apr-2019 19:09:03 UTC] PHP Stack trace:
+[23-Apr-2019 19:09:03 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab7/logout.php:0
+[23-Apr-2019 19:20:28 UTC] PHP Warning:  Division by zero in /home/ubuntu/workspace/Labs/lab7/logout.php on line 6
+[23-Apr-2019 19:20:28 UTC] PHP Stack trace:
+[23-Apr-2019 19:20:28 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab7/logout.php:0
+[23-Apr-2019 19:20:39 UTC] PHP Warning:  Division by zero in /home/ubuntu/workspace/Labs/lab7/logout.php on line 6
+[23-Apr-2019 19:20:39 UTC] PHP Stack trace:
+[23-Apr-2019 19:20:39 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab7/logout.php:0
+[23-Apr-2019 19:20:51 UTC] PHP Warning:  Division by zero in /home/ubuntu/workspace/Labs/lab7/logout.php on line 6
+[23-Apr-2019 19:20:51 UTC] PHP Stack trace:
+[23-Apr-2019 19:20:51 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab7/logout.php:0
+[23-Apr-2019 19:21:35 UTC] PHP Warning:  Division by zero in /home/ubuntu/workspace/Labs/lab7/logout.php on line 6
+[23-Apr-2019 19:21:35 UTC] PHP Stack trace:
+[23-Apr-2019 19:21:35 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab7/logout.php:0
+[23-Apr-2019 19:52:16 UTC] PHP Warning:  Division by zero in /home/ubuntu/workspace/Labs/lab7/logout.php on line 6
+[23-Apr-2019 19:52:16 UTC] PHP Stack trace:
+[23-Apr-2019 19:52:16 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab7/logout.php:0
+[24-Apr-2019 04:14:35 UTC] PHP Warning:  Division by zero in /home/ubuntu/workspace/Labs/lab7/logout.php on line 6
+[24-Apr-2019 04:14:35 UTC] PHP Stack trace:
+[24-Apr-2019 04:14:35 UTC] PHP   1. {main}() /home/ubuntu/workspace/Labs/lab7/logout.php:0

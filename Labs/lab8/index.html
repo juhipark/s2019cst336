@@ -54,116 +54,14 @@
         </div>
 
 
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="card border-dark mb-3" style="max-width: 20rem;">
-                        <div class="card-header">Favorite <img id="item1" onclick="click_icon_function(this.id)" name="unclicked" src="img/favorite.png" style="width: 40px;" /></div>
-                        <div class="card-body">
-                            <h4 class="card-title">Dark card title</h4>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card border-dark mb-3" style="max-width: 20rem;">
-                        <div class="card-header">Favorite</div>
-                        <div class="card-body">
-                            <h4 class="card-title">Dark card title</h4>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card border-dark mb-3" style="max-width: 20rem;">
-                        <div class="card-header">Header</div>
-                        <div class="card-body">
-                            <h4 class="card-title">Dark card title</h4>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="container" id="displayDiv">
+            
         </div>
 
 
     </div>
 
-    <script type="text/javascript">
-        function keyword_searched(e) {
-            var keyword_str = document.getElementById("keyword_search_id").value;
-            console.log("Keyword searched: ", keyword_str);
-            $.ajax({
-                type: "GET",
-                url: "api/getImages.php",
-                dataType: "json",
-                data: {
-                    "searchKey": $("#keyword_search_id").val()
-                },
-                success: function(data, status) {
-                    console.log(data);
-
-                    for (var idx in data) {
-                        console.log(data[idx]);
-                        //create card --> <img id="item"+idx name="unclicked"
-
-                    }
-                }
-            }); //ajax call
-
-        }
-
-        function click_icon_function(itemID) {
-            if (document.getElementById(itemID).getAttribute("name") == "unclicked") {
-                console.log(itemID);
-                document.getElementById(itemID).setAttribute("src", "img/favorite-on.png");
-                document.getElementById(itemID).setAttribute("name", "clicked");
-                //update url link to db
-                $.ajax({
-                    type: "PUT",
-                    url: "api/getImages.php",
-                    dataType: "json",
-                    data: {
-                        "urlLink": $("#keyword_search_id").val()
-                    },
-                    success: function(data, status) {
-                        console.log(data);
-
-                        for (var idx in data) {
-                            console.log(data[idx]);
-                            //create card --> <img id="item"+idx name="unclicked"
-
-                        }
-                    }
-                });
-            }
-            else {
-                document.getElementById(itemID).setAttribute("src", "img/favorite.png");
-                document.getElementById(itemID).setAttribute("name", "unclicked");
-                //delte off of db
-                $.ajax({
-                    type: "DELETE",
-                    url: "api/getImages.php",
-                    dataType: "json",
-                    data: {
-                        "searchKey": $("#keyword_search_id").val()
-                    },
-                    success: function(data, status) {
-                        console.log(data);
-
-                        for (var idx in data) {
-                            console.log(data[idx]);
-                            //create card --> <img id="item"+idx name="unclicked"
-
-                        }
-                    }
-                });
-
-            }
-
-        }
-    </script>
+    <script src="js/function_index.js" type="text/javascript"></script>
 </body>
 
 </html>
