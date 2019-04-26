@@ -33,6 +33,8 @@ $(document).ready(function() {
         dataType: "json",
         data: {},
         success: function(data, status) {
+            console.log("ajax call for every products");
+
             var counter = 1;
             var rowData = [];
 
@@ -54,8 +56,6 @@ $(document).ready(function() {
             gridOptions.api.setRowData(rowData);
         }
     }); //ajax call for loading list of all products in the beginning
-    console.log("ajax call for every products");
-
 
     $("#infoBtn").on('click', function() {
         const selectedNodes = gridOptions.api.getSelectedNodes()
