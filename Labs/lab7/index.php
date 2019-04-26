@@ -34,7 +34,7 @@
                 <img src="img/csumb_logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
                 <span id="heading">OtterMart Admin</span>
             </a>
-            <button type="button" class="btn btn-warning" onClick="addNewProduct()">Add New Product</button>
+            <a href="add.php"><button type="button" class="btn btn-warning" onClick="addNewProduct()">Add New Product</button></a>
             <button class="btn btn-success" id="logoutBtn">Logout</button>
         </nav>
         

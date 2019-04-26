@@ -9,15 +9,21 @@ $(document).ready(function() {
         { headerName: "Product Description", field: "pDescription", width: 200 },
         { headerName: "Price", field: "pPrice", width: 70 },
     ];
-    
+
     // gridOptions.columnApi.setColumnVisible('pId', false);
 
     var gridOptions = {
+        defaultColDef: {
+            editable: true,
+        },
         columnDefs: columnDefs,
         rowData: null,
         rowSelection: 'single', //-->multiple
         suppressRowClickSelection: true,
-        onGridSizeChanged: onGridSizeChanged
+        onGridSizeChanged: onGridSizeChanged,
+        onCellValueChanged: function(data) {
+            updateBug(data);
+        }
     };
 
 
@@ -57,7 +63,7 @@ $(document).ready(function() {
         var selectedDataStringID = selectedData.map(function(node) { return node.pId }).join('&')
 
         console.log('Selected nodes: ' + parseInt(selectedDataStringID));
-        
+
         $("#purchaseHistoryModal").modal("show");
         $.ajax({
             type: "POST",
@@ -68,7 +74,7 @@ $(document).ready(function() {
             },
             success: function(data, status) {
                 console.log(data);
-                
+
                 if (data.length != 0) {
                     $("#history").html("");
                     $("#history").append(data[0]['productName'] + "<br />");
@@ -84,7 +90,7 @@ $(document).ready(function() {
                 }
             }
         });
-        
+
 
     }); //Information Button Click Event
 
@@ -104,26 +110,28 @@ $(document).ready(function() {
 
         console.log('Delete - Selected nodes: ' + selectedDataStringID);
 
-        Swal.fire({
-            type: 'success',
-            title: 'Items have been deleted',
-            showConfirmButton: false,
-            timer: 1500
-        })
-        //delete
 
         $.ajax({
             type: "DELETE",
             url: "api/getProducts.php",
-            dataType: "json",
+            dataType: "",
             data: {
                 "productId": selectedDataStringID,
             },
             success: function(data, status) {
-                
-                console.log("Deleted sql sent out");
-                //refresh the page for updated table
-                window.location.reload();
+                //delete
+                console.log(data);
+                Swal.fire({
+                    type: 'success',
+                    title: 'Items have been deleted',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then((result) => {
+                    console.log("Deleted sql sent out");
+
+                    onRemoveSelected();
+
+                })
 
                 // var counter = 1;
                 // var rowData = [];
@@ -150,41 +158,91 @@ $(document).ready(function() {
 
     }); //Delete Button Click Event
 
-}); //Document ready Event
 
 
-//AG-Grid resize
-function onGridSizeChanged(params) {
-    // get the current grids width
-    var gridWidth = document.getElementById('myGrid').offsetWidth;
 
-    // keep track of which columns to hide/show
-    var columnsToShow = [];
-    var columnsToHide = [];
+    //AG-Grid resize
+    function onGridSizeChanged(params) {
+        // get the current grids width
+        var gridWidth = document.getElementById('myGrid').offsetWidth;
 
-    // iterate over all columns (visible or not) and work out
-    // now many columns can fit (based on their minWidth)
-    var totalColsWidth = 0;
-    var allColumns = params.columnApi.getAllColumns();
-    for (var i = 0; i < allColumns.length; i++) {
-        let column = allColumns[i];
-        totalColsWidth += column.getMinWidth();
-        if (totalColsWidth > gridWidth) {
-            columnsToHide.push(column.colId);
+        // keep track of which columns to hide/show
+        var columnsToShow = [];
+        var columnsToHide = [];
+
+        // iterate over all columns (visible or not) and work out
+        // now many columns can fit (based on their minWidth)
+        var totalColsWidth = 0;
+        var allColumns = params.columnApi.getAllColumns();
+        for (var i = 0; i < allColumns.length; i++) {
+            let column = allColumns[i];
+            totalColsWidth += column.getMinWidth();
+            if (totalColsWidth > gridWidth) {
+                columnsToHide.push(column.colId);
+            }
+            else {
+                columnsToShow.push(column.colId);
+            }
         }
-        else {
-            columnsToShow.push(column.colId);
-        }
+
+        // show/hide columns based on current grid width
+        params.columnApi.setColumnsVisible(columnsToShow, true);
+        params.columnApi.setColumnsVisible(columnsToHide, false);
+
+        // fill out any available space to ensure there are no gaps
+        params.api.sizeColumnsToFit();
     }
 
-    // show/hide columns based on current grid width
-    params.columnApi.setColumnsVisible(columnsToShow, true);
-    params.columnApi.setColumnsVisible(columnsToHide, false);
+    function addNewProduct() {
+        window.location = "add.php";
+    }
 
-    // fill out any available space to ensure there are no gaps
-    params.api.sizeColumnsToFit();
-}
+    function onRemoveSelected() {
+        var selectedData = gridOptions.api.getSelectedRows();
+        var res = gridOptions.api.updateRowData({ remove: selectedData });
+    }
 
-function addNewProduct(){
-    window.location = "add.php";
-}
+    function updateBug(data) {
+        data = data.data;
+        console.log("Editable data below: ");
+        console.log(data);
+
+
+        console.log("product ID:");
+        console.log(data["pId"]);
+        console.log(data["pName"]);
+        console.log(data["pDescription"]);
+        console.log(data["pPrice"]);
+
+        $.ajax({
+            url: 'api/editProducts.php',
+            type: 'GET',
+            data: {
+                'id': data['pId'],
+                'pName': data['pName'],
+                'pDescription': data['pDescription'],
+                'pPrice': data['pPrice']
+            },
+            success: function(data) {
+                Swal.fire({
+                    type: 'success',
+                    title: 'Items have been edited',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            },
+            error: function(data) {
+                Swal.fire({
+                    title: 'Error',
+                    type: 'error',
+                    text: data.responseText
+                })
+            }
+        });
+
+
+    }
+
+
+
+}); //Document ready Event

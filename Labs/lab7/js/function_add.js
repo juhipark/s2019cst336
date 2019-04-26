@@ -13,21 +13,25 @@ function formSubmit() {
     $.ajax({
         type: "GET",
         url: "api/addProducts.php",
-        dataType: "json",
+        dataType: "",
         data: {
             "pName": values[0],
             "pDescription": values[1],
-            "pImg":  values[2],
+            "pImg": values[2],
             "pPrice": values[3],
             "pCategory": catVal
         },
         success: function(data, status) {
+            console.log(data);
             //redirect back to index.php
-            
+            console.log("Redirect to logout page");
+            window.location = "index.php";
+
+
         }
     }); //ajax call
 
-}
+} //function form submit
 $("#logoutBtn").on('click', function() {
     console.log("Redirect to logout page");
     window.location = "auth/logout.php";

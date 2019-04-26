@@ -18,18 +18,11 @@
             
         case "POST":
             $productId = $_POST['productId'];
-            // $productId = file_get_contents('php://input');
             
-            var_dump($productId);
-            // $productId = 34;
-
             $sql = "SELECT * FROM om_product WHERE productId = :pId";
             
-            $np = array(); //np for named parameters
-            $np[':pId'] = $productId;
-            
             $stmt = $conn->prepare($sql);
-            $stmt->execute($np);
+            $stmt->execute(array(':pId' => $productId));
             $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
             echo json_encode($records);
@@ -38,28 +31,19 @@
         case "DELETE":
             
             $_DELETE = file_get_contents('php://input');
-            $np = array();
-            $sql = "DELETE FROM om_product WHERE ";
+            $sql = "DELETE FROM om_product WHERE productId = :pId";
         
             $val_list = explode('=',$_DELETE);
             var_dump($val_list[1]);
             
             $productId = intval($val_list[1]);
-     
-            $sql .= "productId = :pId;";
-            $np[":pId"] = $productId;
-        
 
-    
             
             $stmt = $conn->prepare($sql);
-            $stmt->execute($np);
+            $stmt->execute(array(':pId' => $productId));
             
             // var_dump($stmt);
-
-            $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
-            echo json_encode($records);
+            echo "Delete Successful";
             break;
             
     }
