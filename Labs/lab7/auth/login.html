@@ -71,7 +71,7 @@
         $("#loginButton").on('click', function(e) {
             $.ajax({
                 type: "post",
-                url: "login.php",
+                url: "./login.php",
                 dataType: "json",
                 data: {
                     "email": $("input[name='email']").val(),
