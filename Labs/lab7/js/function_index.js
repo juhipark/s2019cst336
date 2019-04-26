@@ -54,6 +54,7 @@ $(document).ready(function() {
             gridOptions.api.setRowData(rowData);
         }
     }); //ajax call for loading list of all products in the beginning
+    console.log("ajax call for every products");
 
 
     $("#infoBtn").on('click', function() {
