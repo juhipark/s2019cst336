@@ -29,7 +29,7 @@ $(document).ready(function() {
 
     $.ajax({
         type: "GET",
-        url: "api/getProducts.php",
+        url: "./api/getProducts.php",
         dataType: "json",
         data: {},
         success: function(data, status) {
