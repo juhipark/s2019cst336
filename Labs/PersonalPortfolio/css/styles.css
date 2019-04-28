@@ -2,7 +2,7 @@ body {
     background-color:#A3679A;
     color:#EEEDDF;
 }
-header, main, nav, footer {
+header, main, nav, footer, h2 {
     text-align: center;
 }
 header h1 {
