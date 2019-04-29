@@ -12,18 +12,17 @@ $(document).ready(function() {
 
                 console.log(data[idx]);
 
-                // var 
-
                 var rowElem = "<tr><th scope='row'>" + (data[idx]['img_favorites_id']) +
-                    "</th><td>" + data[idx]['img_favorites_url'] + "</td>" +
+                    "</th><td><span class='alert-link' onclick='click_url_function('" + data[idx]['img_favorites_url'] + "');'>" + data[idx]['img_favorites_url'] + "</a></td>" +
                     "<td>" + data[idx]['img_favorites_keyword'] + "</td></tr>";
 
                 document.getElementById("tableBodyId").innerHTML += rowElem;
 
-
             }
-
-
         }
     }); //ajax call
+    function click_url_function(url) {
+
+        console.log("URL clicked");
+    }
 }); //on ready
