@@ -33,6 +33,7 @@ $(document).ready(function() {
         dataType: "json",
         data: {},
         success: function(data, status) {
+            console.log(data);
             console.log("ajax call for every products");
 
             var counter = 1;
@@ -54,6 +55,10 @@ $(document).ready(function() {
             new agGrid.Grid(gridDiv, gridOptions);
 
             gridOptions.api.setRowData(rowData);
+        },
+        error:function(data, status){
+            console.log("All products load failed");
+            
         }
     }); //ajax call for loading list of all products in the beginning
 

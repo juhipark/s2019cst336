@@ -1,5 +1,5 @@
 <?php
-function getDatabaseConnection($dbname = 'ottermart'){
+function getDatabaseConnection(){
 
     // $host = "localhost"; //cloud 9
     
@@ -14,7 +14,7 @@ function getDatabaseConnection($dbname = 'ottermart'){
     $dbname = "heroku_88859229f24938c";
     
     //creates db connection
-    $dbConn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $dbConn = new PDO("mysql:host=$host;dbname=$dbname;charset=UTF8;", $username, $password); // change into charset
 
     //display errors when accessing tables
     $dbConn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
