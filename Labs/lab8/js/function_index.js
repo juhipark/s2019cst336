@@ -72,7 +72,7 @@ function click_icon_function(idNum) {
         //delte off of db
         $.ajax({
             type: "GET",
-            url: "api/deleteImage.php",
+            url: "api/deleteImages.php",
             dataType: "json",
             data: {
                 "imgUrl": $(imgID).attr('src'),
