@@ -71,7 +71,7 @@ $(document).ready(function() {
                     cardHTML += '<div class="row">';
                 }
                 cardHTML += ('<div class="col">' +
-                    '<div class="card border-dark mb-3" style="max-width: 15rem;">' +
+                    '<div class="card border-dark mb-3" style="max-width: 15rem; max-height: 25rem;">' +
                     '<div class="card-header">List View</div>' +
                     '<div class="card-body">' +
                     data[idx][1] +
