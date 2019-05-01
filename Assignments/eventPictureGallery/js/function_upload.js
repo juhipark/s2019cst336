@@ -1,13 +1,11 @@
 $(document).ready(function() {
-    console.log("Upload page is ready");
+    // console.log("Upload page is ready");
 
     $.ajax({
         type: "GET",
         url: "./api/getEmail.php",
         data: {},
         success: function(data, status) {
-            console.log(data);
-
             $("#navUserEmail").html(data);
         },
         error: function(data, status) {
@@ -44,13 +42,16 @@ $(document).ready(function() {
     // 3. Send files with ajax
     $('#uploadButton').click(function(e) {
         setProgress(0);
-        console.log($('form')[0]);
+        
         var formData = new FormData($('form')[0]);
+        
+        //Append caption into form data
+        formData.append('caption', $("#inputCaption").val());
+        
         $.ajax({
                 url: "api/uploadFile.php",
                 type: "POST",
                 data : formData,
-                // data: {formData, 'caption' : "Pretty Image" },
                 processData: false,
                 contentType: false,
                 mimeType: "multipart/form-data",
@@ -77,7 +78,7 @@ $(document).ready(function() {
             .done(function(data, status, xhr) {
                 console.log('upload done');
                 //window.location.href = "<?php echo BASE_PATH?>/assets/<?php echo $controller->group ?>";
-                console.log(xhr);
+                // console.log(xhr);
                 $("#results").html(xhr.responseText)
             })
             .fail(function(xhr) {

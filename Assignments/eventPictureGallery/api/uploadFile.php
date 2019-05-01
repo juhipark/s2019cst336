@@ -21,8 +21,8 @@
     }  
     
     function uplaodFile(&$file_post) {
-        $temp_caption = "Pretty Image";
-        
+        $temp_caption = $_POST['caption'];
+
         $allowed_mime_types = array("image/jpeg", "image/png", "image/svg+xml", "image/gif", "video/ogg", "video/webm", "video/mp4"); // images & videos
         if($file_post["size"] < 10000000){ // 10,000,000 bytes in 10MB
             if(in_array($file_post["type"], $allowed_mime_types)) {
