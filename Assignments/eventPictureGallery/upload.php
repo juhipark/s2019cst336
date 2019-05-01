@@ -17,13 +17,14 @@
     </head>
     
     <body>
-        <div id="content" class="mx-auto text-center" style="width: 80%;" >
+        <div id="content" class="mx-auto" style="width: 80%;" >
         <!-- Image and text -->
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#F5CECD;">
             <a class="navbar-brand" href="#">
                 <img src="img/emoji_logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
                 <span id="heading">Event Picture Gallery</span>
                 <img src="img/emoji_logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                <span id="navUserEmail" class="badge badge-info" ></span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

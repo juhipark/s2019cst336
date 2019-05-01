@@ -1,21 +1,26 @@
 --
--- Table structure for table `om_user_admin`
+-- Table structure for table `picture_gallery`
 --
 
-DROP TABLE IF EXISTS `om_user_admin`;
-CREATE TABLE `om_user_admin` (
-  `om_user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `om_user_email` varchar(128) NOT NULL,
-  `om_user_password` varchar(512) NOT NULL,
-  `om_user_is_admin` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`om_user_id`),
-  UNIQUE KEY `om_user_email` (`om_user_email`),
-  KEY `om_user_email_2` (`om_user_email`),
-  KEY `om_user_id` (`om_user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+-- DROP TABLE IF EXISTS `picture_gallery`;
+-- CREATE TABLE `picture_gallery` (
+--   `gallery_picture_id` int(11) NOT NULL AUTO_INCREMENT,
+--   `gallery_picture_user_email` varchar(128) NOT NULL,
+--   `gallery_picture_media` MEDIUMBLOB NOT NULL,
+--   'gallery_picutre_timestamp' TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  
+-- ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `picture_gallery`;
+CREATE TABLE `picture_gallery` (
+  `gallery_picture_user_email` varchar(128) NOT NULL,
+  `gallery_picture_caption` varchar(300),
+  `gallery_picture_mime` varchar(50) NOT NULL,
+  `gallery_picture_media` MEDIUMBLOB NOT NULL,
+  `gallery_picutre_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `picture_gallery`
 --
--- s3cr3t => $2y$11$OzsRNS8.6u7wxkNFhHdFBOKrT0hvETHTV9twkG8ZhS.94hWSOrivu
-INSERT INTO `om_user_admin` VALUES (1,'admin','$2y$11$OzsRNS8.6u7wxkNFhHdFBOKrT0hvETHTV9twkG8ZhS.94hWSOrivu',0);
+-- INSERT INTO `picture_gallery` (`gallery_picture_user_email`, `gallery_picture_caption`) VALUES ("juhipark@csumb.edu", "Picture of something", );

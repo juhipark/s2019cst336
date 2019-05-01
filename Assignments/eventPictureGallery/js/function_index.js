@@ -1,91 +1,101 @@
 /*global $*/
 
 $(document).ready(function() {
-    $("#selectButton").click(function() {
-        console.log("clicked")
-        $("form input[type='file']").trigger("click")
-    })
+    console.log("Index page is ready");
 
-    // 2. Use ajax to submit files
-    $("form input[type='file']").change(function(e) {
-        $('#filesList').empty();
-        $.map(this.files, function(val) {
-            $('#filesList')
-                .append($('<div>')
-                    .html(val.name)
-                );
-        });
-    })
+    $.ajax({
+        type: "GET",
+        url: "./api/getEmail.php",
+        data: {},
+        success: function(data, status) {
+            console.log(data);
 
-    // 3. Send files with ajax
-    $('#uploadButton').click(function(e) {
-        // ONLY SENDING ONE FILE WITH PUT, SO IF YOU WANT MULTIPLE,
-        // EXECUTE MULTIPLE AJAX CALLS, ONE FOR EACH FILE 
-        // (separate progress bars for each file, etc, etc)
-
-        // Get the JavaScript version of the input, 
-        // then the first element of the files array (only sending one)
-        var file = $("form input[type='file']")[0].files[0]
-
-        var reader = new FileReader();
-
-        reader.onload = function(e) {
-            var fileBinary = reader.result;
-            var fileMimeType = file.type;
-            makeAjaxCall(fileBinary, fileMimeType)
+            $("#navUserEmail").html(data);
+        },
+        error: function(data, status) {
+            console.log("Error:Can't get user email");
         }
+    }); //ajax call for user email
 
-        reader.readAsArrayBuffer(file);
-    });
+    $.ajax({
+        type: "GET",
+        url: "./api/getFile.php",
+        dataType: "json",
+        data: {},
+        success: function(data, status) {
+            // console.log(data);
+            var cardHTML = "";
 
-    function makeAjaxCall(blob, mimeType) {
-        setProgress(0);
 
-        $.ajax({
-                url: "./api/uploadFile.php",
-                type: "PUT",
-                data: blob,
-                processData: false,
-                contentType: false,
-                mimeType: mimeType,
-                cache: false,
-                // This part gives up chunk progress of the file upload
-                xhr: function() {
-                    //upload Progress
-                    var xhr = $.ajaxSettings.xhr();
-                    if (xhr.upload) {
-                        xhr.upload.addEventListener('progress', function(event) {
-                            var percent = 0;
-                            var position = event.loaded || event.position;
-                            var total = event.total;
-                            if (event.lengthComputable) {
-                                percent = Math.ceil(position / total * 100);
-                            }
-                            //update progressbar
-                            setProgress(percent);
-                        }, true);
+            //carousel view
+            for (var idx in data) {
+                console.log(data[idx][0]);
+
+                //carousel view
+                var carouselIndic = "";
+                var carouselInner = "";
+
+                if (idx == 0) {
+                    //Active Element
+                    if (data[idx][0] == "video") {
+                        //video
+                        carouselIndic = '<li data-target="#video-carousel-example" data-slide-to="0" class="active"></li>';
                     }
-                    return xhr;
+                    else {
+                        //image
+                        carouselIndic = '<li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>';
+                    }
+                    carouselInner = '<div class="carousel-item active">' +
+                        data[idx][1] + '</div>';
                 }
-            })
-            .done(function(data, status, xhr) {
-                console.log('upload done');
-                //window.location.href = "<?php echo BASE_PATH?>/assets/<?php echo $controller->group ?>";
-                console.log(xhr);
-                $("#results").html(xhr.responseText)
-            })
-            .fail(function(xhr) {
-                console.log('upload failed');
-                console.log(xhr);
-            })
-            .always(function() {
-                //console.log('done processing upload');
-            });
-    }
+                else {
+                    //Non Active Element
+                    if (data[idx][0] == "video") {
+                        //video
+                        carouselIndic = '<li data-target="#video-carousel-example" data-slide-to="' + idx + '"></li>';
+                    }
+                    else {
+                        //image
+                        carouselIndic = '<li data-target="#carousel-example-2" data-slide-to="' + idx + '"></li>';
+                    }
+                    carouselInner = '<div class="carousel-item">' +
+                        data[idx][1] + '</div>';
+                }
 
-    function setProgress(percent) {
-        $(".progress-bar").css("width", +percent + "%");
-        $(".progress-bar").text(percent + "%");
-    }
+                $("#myCarouselIndic").append(carouselIndic);
+                $("#myCarouselInner").append(carouselInner);
+
+                //list view
+
+                if (idx == 0 || idx == 3 || idx == 6) {
+                    cardHTML += '<div class="row">';
+                }
+                cardHTML += ('<div class="col">' +
+                    '<div class="card border-dark mb-3" style="max-width: 15rem;">' +
+                    '<div class="card-header">List View</div>' +
+                    '<div class="card-body">' +
+                    data[idx][1] +
+                    '</div>' +
+                    '</div>' +
+                    '</div>');
+                if (idx == 2 || idx == 5 || idx == 8) {
+                    cardHTML += '</div>'
+                }
+
+            } // for loop
+            $('#listViewDiv').html(cardHTML);
+
+
+        },
+        error: function(data, status) {
+            console.log("Error:Can't get files data");
+        }
+    }); //ajax call for user email
+
+    $("#logoutBtn").on('click', function() {
+        console.log("Redirect to logout page");
+        window.location = "auth/logout.php";
+
+    }); //Logout Button Click Event
 
 }); //Document ready Event
