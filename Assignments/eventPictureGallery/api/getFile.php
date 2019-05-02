@@ -19,16 +19,16 @@
             foreach ($records as $idx => $record) {
                 if(in_array($record["gallery_picture_mime"], $img_mime_types)){
                     
-                    $img_elem = '<img class="d-block w-100" src="data:'.$record['gallery_picture_mime'].';base64,'
-                    .base64_encode($record['gallery_picture_media']).'"/>';
+                    $img_elem = '<a href=media.html?id='.$record["gallery_picture_id"].'><img class="d-block w-100" src="data:'.$record['gallery_picture_mime'].';base64,'
+                    .base64_encode($record['gallery_picture_media']).'"/></a>';
                     
                     $html_records[$idx] = array("image", $img_elem);
                 
                 }else if (in_array($record["gallery_picture_mime"], $video_mime_types)){
                 
-                    $video_elem = '<video class="video-fluid d-block w-100" autoplay loop muted>
+                    $video_elem = '<a href=media.html?id='.$record["gallery_picture_id"].'><video class="video-fluid d-block w-100" autoplay loop muted>
                     <source type="'.$record["gallery_picture_mime"].'" src="data:'.$record["gallery_picture_mime"].';base64,'.base64_encode($record['gallery_picture_media']) .'">
-                    </video>';
+                    </video></a>';
                     
                     $html_records[$idx] = array("video", $video_elem);
                 }

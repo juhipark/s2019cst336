@@ -1,3 +1,24 @@
 #heading {
   color: white;
 }
+h1{
+    margin: 1em 0 0.5em 0;
+	font-weight: 100;
+	text-transform: uppercase;
+	color: #00caa6;
+	font-style: italic;
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 58px;
+	line-height: 54px;
+	text-shadow: 2px 5px 0 rgba(0,0,0,0.2);
+	background-color: #ACF8F8;
+}
+nav #heading{
+	margin: 1em 0 0.5em 0;
+	color: #148773;
+	font-size: 26px;
+	line-height: 40px;
+	font-weight: bold;
+	font-family: 'Josefin Sans', sans-serif;
+    
+}

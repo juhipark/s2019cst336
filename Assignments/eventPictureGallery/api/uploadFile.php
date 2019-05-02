@@ -45,7 +45,7 @@
                 echo "File is NOT correct format (Allowed: images or vides) <br>";
             }
         }else {
-            echo "File is TOO big to uplooad (MAX: 1MB) <br>";
+            echo "File is TOO big to uplooad (MAX: 10MB) <br>";
         }
         
     }

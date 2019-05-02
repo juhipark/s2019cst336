@@ -13,12 +13,14 @@
 
 DROP TABLE IF EXISTS `picture_gallery`;
 CREATE TABLE `picture_gallery` (
+  `gallery_picture_id` int(11) NOT NULL AUTO_INCREMENT,
   `gallery_picture_user_email` varchar(128) NOT NULL,
   `gallery_picture_caption` varchar(300),
   `gallery_picture_mime` varchar(50) NOT NULL,
   `gallery_picture_media` MEDIUMBLOB NOT NULL,
-  `gallery_picutre_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `gallery_picutre_timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   PRIMARY KEY (`gallery_picture_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `picture_gallery`
