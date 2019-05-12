@@ -1,0 +1,12 @@
+.addTimeSlotLabel1 {
+    padding-right: 10px;
+}
+
+.addTimeSlotLabel2 {
+    padding-right: 10px;
+}
+
+input,
+label {
+    float: left;
+}
