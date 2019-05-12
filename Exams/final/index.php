@@ -162,7 +162,14 @@
 
         console.log("Currently Logged in user: ", currentUser);
         // populate the link
-        $("#invitationLinkInput").val("https://s2019cst336-juhipark.c9users.io/Exams/final/invite.html?user=" + currentUser);
+        $("#invitationLinkInput").val( '<?php 
+                                            if(strpos($_SERVER['HTTP_HOST'], 'herokuapp') !== false) { 
+                                                echo "https://juhipark-s2019cst336.herokuapp.com/Exams/final/invite.html?user=";
+                                            }else {
+                                                echo "https://s2019cst336-juhipark.c9users.io/Exams/final/invite.html?user=";
+                                            }
+                                        } ?>' + currentUser);
+        // "https://s2019cst336-juhipark.c9users.io/Exams/final/invite.html?user=" + currentUser
         
         $( document ).ready(function() {
             $("#invitationLinkButton").on("click", function() {
